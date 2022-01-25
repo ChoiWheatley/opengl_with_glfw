@@ -1,17 +1,28 @@
 #include "headers.h"
 
-static int windowWidth = Constants::windowWidth;
-static int windowHeight = Constants::windowHeight;
 static float deltaTime = .0f;
 static float lastFrame = .0f;
-// 따로 Projection 만 떨어뜨려야 하는 이유: window size가 바뀔 때 콜백함수에서 안전하게 
+// 따로 데이터 객체들만 떨어뜨려야 하는 이유: window size가 바뀔 때 콜백함수에서 안전하게 
 // 데이터만을 변경할 수 있어야 한다.
-Projection projection{ 
+static const auto projection = std::make_shared<Projection>(
 	Constants::Camera::aspectRatio,
 	Constants::Camera::near,
 	Constants::Camera::far,
 	Constants::Camera::fov
-};
+	);
+static const auto cameraPos = std::make_shared<CameraPos>(
+	Constants::Camera::initPosition,
+	Constants::Camera::translationSpeed
+	);
+static const auto cameraFront = std::make_shared<CameraFront>(
+	Constants::Camera::rotationSpeed,
+	Constants::Camera::initYaw,
+	Constants::Camera::initPitch
+	);
+static const auto cameraUp = std::make_shared<CameraUp>(
+	Constants::Camera::initUp
+	);
+
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 static int render_loop(Camera* camera, GLFWwindow* window);
@@ -56,7 +67,7 @@ int use_camera_class_main(int argc, char** argv)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	// create a glfw window
-	window = glfwCreateWindow(windowWidth, windowHeight, Constants::windowName.c_str(),NULL, NULL);
+	window = glfwCreateWindow(Constants::windowWidth, Constants::windowHeight, Constants::windowName.c_str(), NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window!\n";
 		glfwTerminate();
@@ -193,9 +204,7 @@ int use_camera_class_main(int argc, char** argv)
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	windowWidth = width;
-	windowHeight = height;
-	glViewport(0, 0, windowWidth, windowHeight);
+	glViewport(0, 0, width, height);
 	projection.aspectRatio = (float)width / (float)height;
 }// void framebuffer_size_callback()
 
