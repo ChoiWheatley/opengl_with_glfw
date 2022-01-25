@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="MyShader.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="vertices.h">
+      <Filter>header</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="use_camera_class_main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>camera\source</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFront.cpp">
+      <Filter>camera\source</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraPos.cpp">
+      <Filter>camera\source</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraUp.cpp">
+      <Filter>camera\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4.cpp">
+      <Filter>camera\source</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitVector.cpp">
+      <Filter>camera\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Projection.cpp">
+      <Filter>camera\source</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewMatrix.cpp">
+      <Filter>camera\source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyShader.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="headers.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>camera\header</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFront.h">
+      <Filter>camera\header</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraPos.h">
+      <Filter>camera\header</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraUp.h">
+      <Filter>camera\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4.h">
+      <Filter>camera\header</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitVector.h">
+      <Filter>camera\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Projection.h">
+      <Filter>camera\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewMatrix.h">
+      <Filter>camera\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>constants</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fragment.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="vertex.vert">
+      <Filter>shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{5e441678-c9de-463c-af7e-9dd9473a5154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{bf8f29e4-eb6b-466a-b7c3-ddf66771a48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader">
+      <UniqueIdentifier>{f9e7b035-e59b-4f82-aa87-ab59782021b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="constants">
+      <UniqueIdentifier>{e7199a91-855b-4e91-8ab0-a49b95619fe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="camera">
+      <UniqueIdentifier>{5dd18983-e2e6-49e0-9a5b-ff82e393564b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="camera\header">
+      <UniqueIdentifier>{67db9c61-8bc3-46a9-9302-604caaecb5d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="camera\source">
+      <UniqueIdentifier>{c6996793-6258-48f4-a404-854e66355a1b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
