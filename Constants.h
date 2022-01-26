@@ -23,6 +23,8 @@ namespace Constants
 		constexpr float near = .1f;
 		constexpr float far = 100.f;
 		constexpr float fov = 45.f;
+		constexpr float fovMin = 1.f;
+		constexpr float fovMax = 90.f;
 
 		constexpr glm::vec3 initPosition{ 0.f, 0.f, 10.f };
 		constexpr glm::vec3 initUp{ 0.f, 1.f, 0.f };
@@ -31,17 +33,14 @@ namespace Constants
 		constexpr float translationSpeed = 0.01f;
 		constexpr float rotationSpeed = .1f;
 	}// namespace Camera
-	namespace Texture
-	{
-		const std::string textureFileNames[] = {
-			"signup.jpg",
-			"png_with_alpha_channel.png"
-		};
-		constexpr int textureColorFormats[] = {
-			GL_RGB, GL_RGBA
-		};
-
-	}// namespace Texture
+	struct Texture {
+		const std::string textureFileName;
+		const int textureColorFormat;
+	};
+	const std::vector<Texture> textures{
+		{"signup.jpg", GL_RGB},
+		{"png_with_alpha_channel.png", GL_RGBA}
+	};
 	namespace Shader
 	{
 		constexpr char vertexPath[] = "vertex.vert";

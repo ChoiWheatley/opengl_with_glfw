@@ -1,9 +1,10 @@
 #include "CameraUp.h"
 
 CameraUp::CameraUp(glm::vec3 initUp)
-	:vec{ initUp }{}
+	: UnitVector(), vec{ initUp }{}
 
 CameraUp::CameraUp()
+	: UnitVector()
 {
 	vec = Constants::Camera::initUp;
 }

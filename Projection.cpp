@@ -2,11 +2,17 @@
 
 glm::mat4 Projection::getMatrix() const
 {
-    return glm::mat4();
+    return glm::perspective(
+        glm::radians(fov),
+        aspectRatio,
+        near,
+        far
+    );
 }
 
 void Projection::addFOV(float offset)
 {
+    fov += offset;
 }
 
 Projection::Projection()
@@ -15,10 +21,12 @@ Projection::Projection()
     near = Constants::Camera::near;
     far = Constants::Camera::far;
     fov = Constants::Camera::fov;
+    fovMin = Constants::Camera::fovMin;
+    fovMax = Constants::Camera::fovMax;
 }
 
-Projection::Projection(float aspectRatio, float near, float far, float fov)
-    : aspectRatio{ aspectRatio }, near{ near }, far{ far }, fov{ fov }
+Projection::Projection(float aspectRatio, float near, float far, float fov, float fovMin, float fovMax)
+    : aspectRatio{ aspectRatio }, near{ near }, far{ far }, fov{ fov }, fovMin{ fovMin }, fovMax{ fovMax }
 {
 }
 
