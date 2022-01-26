@@ -3,15 +3,12 @@
 #include "vertices.h"
 #include "Camera.h"
 #include "Constants.h"
+#include "Structures.h"
 
 
 namespace Global {
 	static float deltaTime = .0f;
 	static float lastFrame = .0f;
-
-	static auto const cubePosition = std::vector<glm::vec3>{ Constants::cubePositions };
-	static auto cubeAngle = std::vector<float>(Constants::cubePositions.size(), 0.f);
-	static auto cubeAxis = std::vector<glm::vec3>(Constants::cubePositions.size(), glm::vec3(0.f,0.f,0.f));
 
 	static constexpr short polygonCnt = sizeof(MyVert::vertices) / sizeof(float) / 5;
 
@@ -41,10 +38,10 @@ namespace Global {
 }
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader> shader, GLFWwindow* window);
+static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader> shader, GLFWwindow* window, const Structure::RenderState& renderState);
 static const glm::mat4 makeBoxMatrix(const glm::vec3 pos, const float angle, const glm::vec3 axis);
 static void processInput(GLFWwindow* window, std::shared_ptr<Camera> camera);
-static void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+static void keyboard_state(GLFWwindow* window);
 static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 static void arcball_rotation(const glm::vec2& newPos, const glm::vec2& oldPos, int width, int height);
@@ -61,16 +58,19 @@ int use_camera_class_main(int argc, char** argv)
 	std::vector<int> imgWidth(2,0), imgHeight(2,0), nrChannels(2,0);
 	std::vector<unsigned char *> imageData(2, nullptr);
 	GLFWwindow* window;
-	GLuint texture[2];
+	static auto cubePosition = std::vector<glm::vec3>( Constants::cubePositions );
+	static auto cubeAngle = std::vector<float>(Constants::cubePositions.size(), 0.f);
+	static auto cubeAxis = std::vector<glm::vec3>(Constants::cubePositions.size(), glm::vec3(0.f,0.f,0.f));
+	std::vector<unsigned int> texture(2, 0);
 
 	/*random rotation generator*/
 	std::cout << "Random Rotation/Axis Generator ...";
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<float> dis(-180.f, 180.f);
-	for (float& i : Global::cubeAngle)
+	for (float& i : cubeAngle)
 		i = dis(gen);
-	for (glm::vec3& i : Global::cubeAxis)
+	for (glm::vec3& i : cubeAxis)
 		i = glm::vec3(dis(gen), dis(gen), dis(gen));
 	std::cout << "Success\n";
 
@@ -204,6 +204,7 @@ int use_camera_class_main(int argc, char** argv)
 		// tell opengl for sample to which texture unit it belongs to
 		myShader->useShaderProgram();
 		myShader->setInt("texture"+std::to_string(i), i);
+
 	}
 	std::cout << "Success\n";
 
@@ -228,7 +229,8 @@ int use_camera_class_main(int argc, char** argv)
 	std::cout << "Success\n";
 
 	/*Let it draw them all!*/
-	if (render_loop(myCamera, myShader, window) == EXIT_SUCCESS) {
+	Structure::RenderState renderState{cubePosition, cubeAxis, cubeAngle, texture, VAO};
+	if (render_loop(myCamera, myShader, window, renderState) == EXIT_SUCCESS) {
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		myCamera.reset();
@@ -249,7 +251,7 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	Global::projection->aspectRatio = (float)width / (float)height;
 }// void framebuffer_size_callback()
 
-static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader> shader, GLFWwindow* window)
+static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader> shader, GLFWwindow* window, const Structure::RenderState& renderState)
 {
 	while(!glfwWindowShouldClose(window)) {
 		// check delta time between frames
@@ -265,15 +267,22 @@ static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader>
 		glEnable(GL_DEPTH_TEST);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shader->setMatrix4fv("camera", camera->getViewMatrix());
-		shader->setMatrix4fv("projection", camera->getViewMatrix());
+
+		shader->setMatrix4fv("view", camera->getViewMatrix());
+		shader->setMatrix4fv("projection", camera->getProjectionMatrix());
 
 		// draw boxes
-		for (size_t i = 0; i < Global::cubePosition.size(); i++) {
+		for (auto i = 0; i < renderState.textures.size(); i++) {
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, renderState.textures[i]);
+		}
+		shader->useShaderProgram();
+		glBindVertexArray(renderState.VAO);
+		for (size_t i = 0; i < renderState.cubePositions.size(); i++) {
 			shader->setMatrix4fv("model", makeBoxMatrix(
-				Global::cubePosition[i],
-				glm::radians(Global::cubeAngle[i]),
-				Global::cubeAxis[i]
+				renderState.cubePositions[i],
+				glm::radians(renderState.cubeAngles[i]),
+				renderState.cubeAxis[i]
 			));
 			glDrawArrays(GL_TRIANGLES, 0, Global::polygonCnt);
 		}
@@ -298,15 +307,17 @@ static void processInput(GLFWwindow* window, std::shared_ptr<Camera> camera)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
+	// Examine keyboard state
+	keyboard_state(window);
+
 	// register callback functions specific event from input devices
-	glfwSetKeyCallback(window, keyboard_callback);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 }
 /*
-* CameraPos의 값을 변경한다. qweasd + left shift 조합으로 상하좌우전후 움질일 수 있다.
+* CameraPos의 값을 변경한다. qweasd + left shift 조합으로 상하좌우전후 움직일 수 있다.
 */
-static void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+static inline void keyboard_state(GLFWwindow* window)
 {
 	using namespace Global;
 	static const glm::vec3 right(1.f, 0.f, 0.f);
@@ -316,30 +327,24 @@ static void keyboard_callback(GLFWwindow* window, int key, int scancode, int act
 	auto offset = glm::vec3{ 0.f, 0.f, 0.f };
 	float translationSpeed = cameraPos->speed * deltaTime;
 
-	if (key == GLFW_KEY_LEFT_SHIFT && action == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) ==  GLFW_PRESS)
 		translationSpeed *= 3.f;
-	if (key == GLFW_KEY_Q && action == GLFW_PRESS) {
-		std::cout << "Q\b";
+	if (glfwGetKey(window, GLFW_KEY_Q) ==  GLFW_PRESS) {
 		offset += translationSpeed * up;
 	}
-	if (key == GLFW_KEY_W && action == GLFW_PRESS) {
-		std::cout << "W\b";
+	if (glfwGetKey(window, GLFW_KEY_W) ==  GLFW_PRESS) {
 		offset += translationSpeed * front;
 	}
-	if (key == GLFW_KEY_E && action == GLFW_PRESS) {
-		std::cout << "E\b";
+	if (glfwGetKey(window, GLFW_KEY_E) ==  GLFW_PRESS) {
 		offset += translationSpeed * (-up);
 	}
-	if (key == GLFW_KEY_A && action == GLFW_PRESS) {
-		std::cout << "A\b";
+	if (glfwGetKey(window, GLFW_KEY_A) ==  GLFW_PRESS) {
 		offset += translationSpeed * (-right);
 	}
-	if (key == GLFW_KEY_S && action == GLFW_PRESS) {
-		std::cout << "S\b";
+	if (glfwGetKey(window, GLFW_KEY_S) ==  GLFW_PRESS) {
 		offset += translationSpeed * (-front);
 	}
-	if (key == GLFW_KEY_D && action == GLFW_PRESS) {
-		std::cout << "D\b";
+	if (glfwGetKey(window, GLFW_KEY_D) ==  GLFW_PRESS) {
 		offset += translationSpeed * right;
 	}
 
@@ -360,6 +365,12 @@ static inline glm::vec3 get_arcball_vector(float x, float y, int width, int heig
 static inline glm::vec3 get_arcball_vector(const glm::vec2& pos, int width, int height)
 {}
 static std::ostream& operator<< (std::ostream& os, const glm::vec2& vec2)
-{}
+{
+	os << "(" << vec2.x << ", " << vec2.y << ")";
+	return os;
+}
 static std::ostream& operator<< (std::ostream& os, const glm::vec3& vec3)
-{}
+{
+	os << "(" << vec3.x << ", " << vec3.y << ", " << vec3.z << ")";
+	return os;
+}

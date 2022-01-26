@@ -76,6 +76,9 @@
     <ClInclude Include="Constants.h">
       <Filter>constants</Filter>
     </ClInclude>
+    <ClInclude Include="Structures.h">
+      <Filter>constants</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.frag">
