@@ -345,8 +345,8 @@ int main_camera(int argc, char** argv)
 		camera_trans = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 		// 4. register all those matrices into vertex shader's 
 		//	  uniform variables
-		myShader->setMatrix4fv("world", world_trans);
-		myShader->setMatrix4fv("camera", camera_trans);
+		//myShader->setMatrix4fv("world", world_trans);
+		myShader->setMatrix4fv("view", camera_trans);
 		myShader->setMatrix4fv("projection", projection_trans);
 
 

@@ -50,11 +50,6 @@ void Camera::setFar(float far)
 	projectionMatrix->far = far;
 }
 
-//Camera::Camera(Projection _projectionMatrix, ViewMatrix _viewMatrix)
-//	: projectionMatrix{ _projectionMatrix }, viewMatrix{ _viewMatrix }
-//{
-//}
-
 Camera::Camera(std::shared_ptr<Projection> _projectionMatrix, std::shared_ptr<ViewMatrix> _viewMatrix)
 {
 	projectionMatrix = _projectionMatrix;

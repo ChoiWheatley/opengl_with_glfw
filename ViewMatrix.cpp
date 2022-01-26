@@ -2,14 +2,11 @@
 
 glm::mat4 ViewMatrix::getMatrix() const
 {
-	/*굳이 이렇게 해야하나 싶지만 그냥 나는 getVector()를
-	숨기고 싶었다. glm의 `not method, do function` 에서 
-	영감을 얻음.*/
-	return glm::lookAt(
-		cameraPos->getVector(),
-		cameraFront->getVector(),
-		cameraUp->getVector()
-	);
+	auto pos = cameraPos->getVector();
+	auto front = cameraFront->getVector();
+	auto up = cameraUp->getVector();
+
+	return glm::lookAt(pos, pos + front, up);
 }
 
 void ViewMatrix::cameraTranslationSpeed(float speed)

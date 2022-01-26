@@ -29,9 +29,6 @@ public:
 
 private:
     /**
-    * Methods
-    */
-    /**
     * Members
     */
     std::shared_ptr<CameraPos> cameraPos;
