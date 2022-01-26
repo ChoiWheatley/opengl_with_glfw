@@ -20,7 +20,7 @@ public:
 	/*CameraFront에서 담당하는 Rotation의 마우스 민감도를 변경할 수 있다.*/
 	void cameraRotationSpeed(float speed);
 	/*단순히 기존 position 벡터에 addVec을 더한다.*/
-	void translateCamera(const glm::vec3& addVec);
+	void addPos(const glm::vec3& addVec);
 	/*yaw(좌우 혹은 y축 회전), pitch(상하 혹은 x축 회전) 값을 더한다. degree임.*/
 	void rotateCamera(float addYaw, float addPitch);
 	/*field of view 값을 조절한다.*/
