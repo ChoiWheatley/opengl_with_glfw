@@ -13,6 +13,10 @@ glm::mat4 Projection::getMatrix() const
 void Projection::addFOV(float offset)
 {
     fov += offset;
+    if (fov > fovMax)
+        fov = fovMax;
+    if (fov < fovMin)
+        fov = fovMin;
 }
 
 Projection::Projection()
