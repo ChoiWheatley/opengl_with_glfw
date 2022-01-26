@@ -17,12 +17,7 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-#define STB_IMAGE_IMPLEMENTATION
 #include <stb-master/stb_image.h>
-
-#include "MyShader.h"
-#include "vertices.h"
-#include "Camera.h"
 
 #define VERTEX_BIND_TARGET GL_ARRAY_BUFFER
 

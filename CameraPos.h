@@ -1,16 +1,18 @@
 #pragma once
 #include "UnitVector.h"
+
 /**
 * 
 */
 struct CameraPos :
-    private UnitVector
+    public UnitVector
 {
 public:
     /**
     * Interfaces
     */
-    void translate(const glm::vec3& addVec);
+    virtual glm::vec3 getVector() override;
+    void addVec(const glm::vec3& addVec);
     /**
     * Constructor
     */
@@ -20,11 +22,7 @@ public:
     * Public Members
     */
     float speed;
-protected:
-    virtual glm::vec3 getVector() final;
-    /**
-    * Private Members
-    */
+private:
     glm::vec3 position;
 };
 

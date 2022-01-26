@@ -10,7 +10,7 @@ uniform mat4 model, world, projection, camera;
 
 void main() {
 	/*passing processed vector into `gl_Position`*/
-	gl_Position = projection * camera * world * model * vec4(aPos, 1.0);		
+	gl_Position = projection * camera * model * vec4(aPos, 1.0);		
 	TexCoord = vec2(aTexCoord.x, aTexCoord.y);
 }
 
