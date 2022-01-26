@@ -9,8 +9,8 @@
 namespace Global {
 	static float deltaTime = .0f;
 	static float lastFrame = .0f;
-
 	static constexpr short polygonCnt = sizeof(MyVert::vertices) / sizeof(float) / 5;
+	static glm::mat4 worldMatrix{ 1.f };
 
 	// 따로 데이터 객체들만 떨어뜨려야 하는 이유: 데이터가 바뀔 때 안전하게 
 	// 데이터만을 변경할 수 있어야 한다.
@@ -46,9 +46,9 @@ static void processInput(GLFWwindow* window, std::shared_ptr<Camera> camera);
 static void keyboard_state(GLFWwindow* window);
 static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-static void arcball_rotation(const glm::vec2& newPos, const glm::vec2& oldPos, int width, int height);
-static inline glm::vec3 get_arcball_vector(float x, float y, int width, int height);
-static inline glm::vec3 get_arcball_vector(const glm::vec2& pos, int width, int height);
+static const glm::mat4 arcball_rotation(const glm::vec2& newPos, const glm::vec2& oldPos, int width, int height);
+static inline const glm::vec3 get_arcball_vector(float x, float y, int width, int height);
+static inline const glm::vec3 get_arcball_vector(const glm::vec2& pos, int width, int height);
 static std::ostream& operator<< (std::ostream& os, const glm::vec2& vec2);
 static std::ostream& operator<< (std::ostream& os, const glm::vec3& vec3);
 
@@ -285,6 +285,7 @@ static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader>
 
 		shader->setMatrix4fv("view", camera->getViewMatrix());
 		shader->setMatrix4fv("projection", camera->getProjectionMatrix());
+		shader->setMatrix4fv("world", Global::worldMatrix);
 
 		// draw boxes
 		for (auto i = 0; i < renderState.textures.size(); i++) {
@@ -374,8 +375,8 @@ static void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	static glm::vec2 oldPos{ 0.f, 0.f };
 	static bool firstMouse = true;
 	const glm::vec2 newPos{ xpos, ypos };
-	const std::unique_ptr<int> width;
-	const std::unique_ptr<int> height;
+	const auto width = std::make_unique<int>(0) ;
+	const auto height = std::make_unique<int>(0) ;
 
 	glfwGetWindowSize(window, width.get(), height.get());
 
@@ -397,8 +398,7 @@ static void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 			oldPos = newPos;
 			firstMouse = false;
 		}
-		// TODO: arcball rotation without `world` matrix
-
+		Global::worldMatrix = arcball_rotation(newPos, oldPos, *width, *height);
 	}
 	/*left mouse released*/
 	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_RELEASE) {
@@ -414,15 +414,62 @@ static void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 }
 static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	Global::projection->addFOV(-yoffset);
+	Global::projection->addFOV((float)-yoffset);
 }
-static void arcball_rotation(const glm::vec2& newPos, const glm::vec2& oldPos, int width, int height)
+/*
+* 윈도우 크기의 가상의 원을 가지고 강체 회전 변환행렬을 생성한다.
+* 1. transform view coord into world coordinate
+* 2. find two vectors `OP1` and `OP2`
+* 3. calculate angle between OP1 and OP2 from the center which
+*	 is defined in camera target
+* 4. get rotation axis using cross product
+* 5. get rotation matrix
+*/
+static const glm::mat4 arcball_rotation(const glm::vec2& newPos, const glm::vec2& oldPos, int width, int height)
 {
+	if (newPos == oldPos)
+		return Global::worldMatrix;
+	const auto vOldDelta = get_arcball_vector(oldPos, width, height);
+	const auto vNewDelta = get_arcball_vector(newPos, width, height);
+	const float angle = glm::acos(fmin(1.f, glm::dot(vOldDelta, vNewDelta)));
+	const glm::vec3 axisInViewCoord = glm::cross(vOldDelta, vNewDelta);
+
+	// converting the rotation axis from view coord to world coords.
+	const glm::mat4 viewToWorld = glm::inverse(Global::worldMatrix);
+	const glm::vec4 axisInWorldCoord = viewToWorld * glm::vec4(axisInViewCoord, 1.f);
+
+	return glm::rotate(Global::worldMatrix,
+		Constants::arcballRotationSpeed * angle,
+		glm::vec3(axisInWorldCoord)
+	);
 }
-static inline glm::vec3 get_arcball_vector(float x, float y, int width, int height)
+/*
+* Map screen vector into sphere vector
+*/
+static inline const glm::vec3 get_arcball_vector(float x, float y, int width, int height)
 {
+	// screen 정중앙을 [0,0,0]으로 두었을 때 [x,y,0] 벡터를 OP 라고 하자.
+	// x, y는 screen의 왼쪽 상단을 0으로 두기 때문에 변환과정이 필요함.
+	// 원점으로부터의 상대적인 거리를 계산한다. x,y=[-1,1] 구간
+	// 원 크기를 두 배로 늘렸다. 스크린 두 배 크기의 원으로 돌리면 정규화할
+	// 일이 많지 않을 것이다.
+	width *= 2;
+	height *= 2;
+	glm::vec3 P{
+		2 * x / width - .5f,
+		2 * y / height - .5f,
+		0.f
+	};
+	P.y = -P.y;
+	const float OP_squared = P.x * P.x + P.y * P.y;
+	// constraint for imaginary number
+	if (OP_squared > 1.f)
+		P = glm::normalize(P);
+	else
+		P.z = glm::sqrt(1.f - OP_squared);
+	return P;
 }
-static inline glm::vec3 get_arcball_vector(const glm::vec2& pos, int width, int height)
+static inline const glm::vec3 get_arcball_vector(const glm::vec2& pos, int width, int height)
 {
 	return get_arcball_vector(pos.x, pos.y, width, height);
 }

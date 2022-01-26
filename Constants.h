@@ -22,6 +22,7 @@ namespace Constants
 		{"signup.jpg", GL_RGB},
 		{"png_with_alpha_channel.png", GL_RGBA}
 	};
+	constexpr float arcballRotationSpeed = 2.5f;
 	namespace Camera
 	{
 		constexpr float aspectRatio = windowWidth / windowHeight;

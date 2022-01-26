@@ -5,7 +5,7 @@ glm::vec3 CameraFront::getVector()
     if (pitch > 89.f)
         pitch = 89.f;
     if (pitch < -89.f)
-        pitch = 89.f;
+        pitch = -89.f;
 
     auto ryaw = glm::radians(yaw);
     auto rpitch = glm::radians(pitch);
