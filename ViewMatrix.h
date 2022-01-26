@@ -15,7 +15,7 @@ public:
     virtual glm::mat4 getMatrix() const override;
     void cameraTranslationSpeed(float speed);
     void cameraRotationSpeed(float speed);
-    void addVec(const glm::vec3& addVec);
+    void addPos(const glm::vec3& addVec);
     void rotate(float addYaw, float addPitch);
 
     /**

@@ -398,6 +398,7 @@ static void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 			firstMouse = false;
 		}
 		// TODO: arcball rotation without `world` matrix
+
 	}
 	/*left mouse released*/
 	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_RELEASE) {

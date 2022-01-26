@@ -19,7 +19,7 @@ void ViewMatrix::cameraRotationSpeed(float speed)
 	cameraFront->speed = speed;
 }
 
-void ViewMatrix::addVec(const glm::vec3& addVec)
+void ViewMatrix::addPos(const glm::vec3& addVec)
 {
 	cameraPos->addVec(addVec);
 }

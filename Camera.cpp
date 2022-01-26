@@ -20,9 +20,9 @@ void Camera::cameraRotationSpeed(float speed)
 	viewMatrix->cameraRotationSpeed(speed);
 }
 
-void Camera::translateCamera(const glm::vec3& addVec)
+void Camera::addPos(const glm::vec3& addVec)
 {
-	viewMatrix->addVec(addVec);
+	viewMatrix->addPos(addVec);
 }
 
 void Camera::rotateCamera(float addYaw, float addPitch)
