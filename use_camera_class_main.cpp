@@ -37,9 +37,11 @@ namespace Global {
 
 }
 
+
+
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader> shader, GLFWwindow* window, const Structure::RenderState& renderState);
-static const glm::mat4 makeBoxMatrix(const glm::vec3 pos, const float angle, const glm::vec3 axis);
+static inline const glm::mat4 make_box_matrix(const glm::vec3 pos, const float angle, const glm::vec3 axis);
 static void processInput(GLFWwindow* window, std::shared_ptr<Camera> camera);
 static void keyboard_state(GLFWwindow* window);
 static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -49,6 +51,8 @@ static inline glm::vec3 get_arcball_vector(float x, float y, int width, int heig
 static inline glm::vec3 get_arcball_vector(const glm::vec2& pos, int width, int height);
 static std::ostream& operator<< (std::ostream& os, const glm::vec2& vec2);
 static std::ostream& operator<< (std::ostream& os, const glm::vec3& vec3);
+
+
 
 int use_camera_class_main(int argc, char** argv)
 {
@@ -229,7 +233,14 @@ int use_camera_class_main(int argc, char** argv)
 	std::cout << "Success\n";
 
 	/*Let it draw them all!*/
-	Structure::RenderState renderState{cubePosition, cubeAxis, cubeAngle, texture, VAO};
+	// 전역변수는 쓰지말자
+	Structure::RenderState renderState{
+		.cubePositions = cubePosition, 
+		.cubeAxis = cubeAxis, 
+		.cubeAngles = cubeAngle, 
+		.textures = texture, 
+		.VAO = VAO
+	};
 	if (render_loop(myCamera, myShader, window, renderState) == EXIT_SUCCESS) {
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
@@ -251,6 +262,10 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	Global::projection->aspectRatio = (float)width / (float)height;
 }// void framebuffer_size_callback()
 
+/*
+* render loop가 기존에 main 함수로부터 떨어져나왔기 때문에 필요한 데이터를 파라메터로 넣어주어야 하는 수고가 필요하다.
+* 그래서 RenderState라는 구조체를 활용했다. 이 구조체 안에는 const 변수만 들어가도록 했다.
+*/
 static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader> shader, GLFWwindow* window, const Structure::RenderState& renderState)
 {
 	while(!glfwWindowShouldClose(window)) {
@@ -279,7 +294,7 @@ static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader>
 		shader->useShaderProgram();
 		glBindVertexArray(renderState.VAO);
 		for (size_t i = 0; i < renderState.cubePositions.size(); i++) {
-			shader->setMatrix4fv("model", makeBoxMatrix(
+			shader->setMatrix4fv("model", make_box_matrix(
 				renderState.cubePositions[i],
 				glm::radians(renderState.cubeAngles[i]),
 				renderState.cubeAxis[i]
@@ -294,7 +309,7 @@ static int render_loop(std::shared_ptr<Camera> camera, std::shared_ptr<MyShader>
 	}
 	return EXIT_SUCCESS;
 }
-static const glm::mat4 makeBoxMatrix(const glm::vec3 pos, const float angle, const glm::vec3 axis) 
+static inline const glm::mat4 make_box_matrix(const glm::vec3 pos, const float angle, const glm::vec3 axis) 
 {
 	glm::mat4 ret(1.f);
 	ret = glm::translate(ret, pos);
@@ -320,9 +335,9 @@ static void processInput(GLFWwindow* window, std::shared_ptr<Camera> camera)
 static inline void keyboard_state(GLFWwindow* window)
 {
 	using namespace Global;
-	static const glm::vec3 right(1.f, 0.f, 0.f);
-	static const glm::vec3 up(0.f, 1.f, 0.f);
-	static const glm::vec3 front(0.f, 0.f, -1.f);
+	const auto front = Global::cameraFront->getVector();
+	const auto up = Global::cameraUp->getVector();
+	const auto right = glm::normalize(glm::cross(front, up));
 
 	auto offset = glm::vec3{ 0.f, 0.f, 0.f };
 	float translationSpeed = cameraPos->speed * deltaTime;
@@ -355,15 +370,61 @@ static inline void keyboard_state(GLFWwindow* window)
 * right mouse drag = arcball rotation to world space
 */
 static void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-{}
+{
+	static glm::vec2 oldPos{ 0.f, 0.f };
+	static bool firstMouse = true;
+	const glm::vec2 newPos{ xpos, ypos };
+	const std::unique_ptr<int> width;
+	const std::unique_ptr<int> height;
+
+	glfwGetWindowSize(window, width.get(), height.get());
+
+	/*left mouse pressed*/
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+		if (firstMouse) {
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			oldPos = newPos;
+			firstMouse = false;
+		}
+		auto delta = newPos - oldPos;
+		Global::cameraFront->addYaw(delta.x);
+		Global::cameraFront->addPitch(-delta.y);
+	}
+	/*right mouse pressed*/
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
+		if (firstMouse) {
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			oldPos = newPos;
+			firstMouse = false;
+		}
+		// TODO: arcball rotation without `world` matrix
+	}
+	/*left mouse released*/
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_RELEASE) {
+		firstMouse = true;
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+	/*right mouse released*/
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_RELEASE) {
+		firstMouse = true;
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+	oldPos = newPos;
+}
 static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{}
+{
+	Global::projection->addFOV(-yoffset);
+}
 static void arcball_rotation(const glm::vec2& newPos, const glm::vec2& oldPos, int width, int height)
-{}
+{
+}
 static inline glm::vec3 get_arcball_vector(float x, float y, int width, int height)
-{}
+{
+}
 static inline glm::vec3 get_arcball_vector(const glm::vec2& pos, int width, int height)
-{}
+{
+	return get_arcball_vector(pos.x, pos.y, width, height);
+}
 static std::ostream& operator<< (std::ostream& os, const glm::vec2& vec2)
 {
 	os << "(" << vec2.x << ", " << vec2.y << ")";

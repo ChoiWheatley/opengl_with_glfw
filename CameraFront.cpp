@@ -21,12 +21,12 @@ glm::vec3 CameraFront::getVector()
 
 void CameraFront::addYaw(float degree)
 {
-    yaw += degree;
+    yaw += degree * speed;
 }
 
 void CameraFront::addPitch(float degree)
 {
-    pitch += degree;
+    pitch += degree * speed;
 }
 
 CameraFront::CameraFront(float speed, float yaw, float pitch)
