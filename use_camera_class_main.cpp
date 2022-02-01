@@ -224,12 +224,10 @@ int use_camera_class_main(int argc, char** argv)
 	std::cout << "Initializing Camera Object ...";
 	myCamera = std::make_shared<Camera>(
 		Global::projection,
-		std::make_shared<ViewMatrix>(
-			Global::cameraPos,
-			Global::cameraFront,
-			Global::cameraUp
-		)
-	);
+		Global::cameraPos,
+		Global::cameraFront,
+		Global::cameraUp
+		);
 	std::cout << "Success\n";
 
 	/*Let it draw them all!*/

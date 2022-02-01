@@ -10,55 +10,21 @@ glm::mat4 Camera::getProjectionMatrix() const
 	return this->projectionMatrix->getMatrix();
 }
 
-void Camera::cameraTranslationSpeed(float speed)
-{
-	viewMatrix->cameraTranslationSpeed(speed);
-}
-
-void Camera::cameraRotationSpeed(float speed)
-{
-	viewMatrix->cameraRotationSpeed(speed);
-}
-
-void Camera::addPos(const glm::vec3& addVec)
-{
-	viewMatrix->addPos(addVec);
-}
-
-void Camera::rotateCamera(float addYaw, float addPitch)
-{
-	viewMatrix->rotate(addYaw, addPitch);
-}
-
-void Camera::addFOV(float add) 
-{
-	this->projectionMatrix->addFOV(add);
-}
-
-void Camera::setAspectRatio(float ratio)
-{
-	projectionMatrix->aspectRatio = ratio;
-}
-
-void Camera::setNear(float near)
-{
-	projectionMatrix->near = near;
-}
-
-void Camera::setFar(float far)
-{
-	projectionMatrix->far = far;
-}
-
-Camera::Camera(std::shared_ptr<Projection> _projectionMatrix, std::shared_ptr<ViewMatrix> _viewMatrix)
+Camera::Camera(std::shared_ptr<Matrix4> _projectionMatrix, std::shared_ptr<Matrix4> _viewMatrix)
 {
 	projectionMatrix = _projectionMatrix;
 	viewMatrix = _viewMatrix;
 }
 
+Camera::Camera(std::shared_ptr<Matrix4> _projectionMatrix, std::shared_ptr<UnitVector> _pos, std::shared_ptr<UnitVector> _front, std::shared_ptr<UnitVector> _up)
+{
+	projectionMatrix = _projectionMatrix;
+	viewMatrix = std::make_shared<ViewMatrix>(_pos, _front, _up);
+}
+
 Camera::Camera()
 {
-	projectionMatrix = std::make_shared<Projection>();
+	projectionMatrix =std::make_shared<Projection>();
 	viewMatrix = std::make_shared<ViewMatrix>();
 }
 
