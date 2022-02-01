@@ -17,7 +17,7 @@ public:
 	/**
 	* Constructor
 	*/
-	Projection(float aspectRatio, float near, float far, float fov);
+	Projection(float aspectRatio, float near, float far, float fov, float fovMin, float fovMax);
 	Projection();
 	/**
 	* public Members
@@ -30,5 +30,7 @@ private:
 	* private mambers
 	*/
 	float fov;
+	float fovMin;
+	float fovMax;
 };
 

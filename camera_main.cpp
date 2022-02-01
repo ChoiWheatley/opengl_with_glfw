@@ -5,11 +5,16 @@
 * reference: https://learnopengl.com/Getting-started/Transformations
 */
 #include "headers.h"
+#include "Constants.h"
+#include "vertices.h"
+#include "MyShader.h"
+
+
 
 static const GLchar* vertexPath = "vertex.vert";
 static const GLchar* fragmentPath = "fragment.frag";
-static GLsizei windowWidth;
-static GLsizei windowHeight;
+static GLsizei windowWidth = Constants::windowWidth;
+static GLsizei windowHeight = Constants::windowHeight;
 static GLfloat deltaTime = .0f; // Time between current frame and last frame
 static GLfloat lastFrame = .0f; // Time of last frame
 GLfloat cameraYaw = -90.f;
@@ -20,7 +25,7 @@ GLfloat cameraPitch = 0.f;
 static glm::mat4 world_trans(1.f), camera_trans(1.f), projection_trans(1.f);
 static glm::vec3 cameraPos, cameraFront, cameraUp;
 static GLfloat cameraFOV = 45.f; 
-static GLfloat cameraAspectRatio = WINDOW_WIDTH / WINDOW_HEIGHT;
+static GLfloat cameraAspectRatio = (float)windowWidth / (float)windowHeight;
 static GLfloat cameraNear = .1f, cameraFar = 100.f;
 
 
@@ -121,7 +126,7 @@ int main_camera(int argc, char** argv)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	// create a glfw window
-	GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "LearnOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "LearnOpenGL", NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window!\n";
 		glfwTerminate();
@@ -140,7 +145,7 @@ int main_camera(int argc, char** argv)
 	// of the rendering window (ViewPort) so OpenGL knows how we want to
 	// display the data and coords with respect to the window.
 	//glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	framebuffer_size_callback(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+	framebuffer_size_callback(window, windowWidth, windowHeight);
 
 
 
@@ -340,8 +345,8 @@ int main_camera(int argc, char** argv)
 		camera_trans = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 		// 4. register all those matrices into vertex shader's 
 		//	  uniform variables
-		myShader->setMatrix4fv("world", world_trans);
-		myShader->setMatrix4fv("camera", camera_trans);
+		//myShader->setMatrix4fv("world", world_trans);
+		myShader->setMatrix4fv("view", camera_trans);
 		myShader->setMatrix4fv("projection", projection_trans);
 
 

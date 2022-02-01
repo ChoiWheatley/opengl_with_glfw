@@ -1,5 +1,6 @@
 #pragma once
 #include "headers.h"
+#include "Structures.h"
 namespace Constants
 {
 	constexpr int windowWidth = 800;
@@ -17,31 +18,27 @@ namespace Constants
 		glm::vec3(1.5f,  0.2f, -1.5f),
 		glm::vec3(-1.3f,  1.0f, -1.5f)
 	};
+	const std::vector<Structure::Texture> textures{
+		{"signup.jpg", GL_RGB},
+		{"png_with_alpha_channel.png", GL_RGBA}
+	};
+	constexpr float arcballRotationSpeed = 2.5f;
 	namespace Camera
 	{
 		constexpr float aspectRatio = windowWidth / windowHeight;
 		constexpr float near = .1f;
 		constexpr float far = 100.f;
 		constexpr float fov = 45.f;
+		constexpr float fovMin = 1.f;
+		constexpr float fovMax = 90.f;
 
 		constexpr glm::vec3 initPosition{ 0.f, 0.f, 10.f };
 		constexpr glm::vec3 initUp{ 0.f, 1.f, 0.f };
 		constexpr float initYaw = -90.f;
 		constexpr float initPitch = 0.f;
-		constexpr float translationSpeed = 0.01f;
+		constexpr float translationSpeed = 3.1f;
 		constexpr float rotationSpeed = .1f;
 	}// namespace Camera
-	namespace Texture
-	{
-		const std::string textureFileNames[] = {
-			"signup.jpg",
-			"png_with_alpha_channel.png"
-		};
-		constexpr int textureColorFormats[] = {
-			GL_RGB, GL_RGBA
-		};
-
-	}// namespace Texture
 	namespace Shader
 	{
 		constexpr char vertexPath[] = "vertex.vert";

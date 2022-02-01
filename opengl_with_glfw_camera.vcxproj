@@ -51,6 +51,7 @@
     <ClInclude Include="headers.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="MyShader.h" />
+    <ClInclude Include="Structures.h" />
     <ClInclude Include="UnitVector.h" />
     <ClInclude Include="Projection.h" />
     <ClInclude Include="ViewMatrix.h" />

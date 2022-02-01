@@ -20,9 +20,9 @@ void Camera::cameraRotationSpeed(float speed)
 	viewMatrix->cameraRotationSpeed(speed);
 }
 
-void Camera::translateCamera(const glm::vec3& addVec)
+void Camera::addPos(const glm::vec3& addVec)
 {
-	viewMatrix->translate(addVec);
+	viewMatrix->addPos(addVec);
 }
 
 void Camera::rotateCamera(float addYaw, float addPitch)
@@ -49,11 +49,6 @@ void Camera::setFar(float far)
 {
 	projectionMatrix->far = far;
 }
-
-//Camera::Camera(Projection _projectionMatrix, ViewMatrix _viewMatrix)
-//	: projectionMatrix{ _projectionMatrix }, viewMatrix{ _viewMatrix }
-//{
-//}
 
 Camera::Camera(std::shared_ptr<Projection> _projectionMatrix, std::shared_ptr<ViewMatrix> _viewMatrix)
 {

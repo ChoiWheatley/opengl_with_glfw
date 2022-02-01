@@ -15,7 +15,7 @@ public:
     virtual glm::mat4 getMatrix() const override;
     void cameraTranslationSpeed(float speed);
     void cameraRotationSpeed(float speed);
-    void translate(const glm::vec3& addVec);
+    void addPos(const glm::vec3& addVec);
     void rotate(float addYaw, float addPitch);
 
     /**
@@ -28,11 +28,6 @@ public:
     ~ViewMatrix();
 
 private:
-    /**
-    * Methods
-    */
-    /*내부 객체들에 메시지를 전달하기 위한 메서드*/
-    glm::vec3 getVector(UnitVector* vec) const;
     /**
     * Members
     */
