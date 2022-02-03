@@ -6,7 +6,7 @@
 * 선언해버리고 멤버변수들을 public화 해버릴까?
 */
 struct Projection
-	: private Matrix4
+	: public Matrix4
 {
 public:
 	/**
