@@ -6,24 +6,20 @@
 /**
 */
 class ViewMatrix :
-    private Matrix4
+    public Matrix4
 {
 public:
     /**
     * Interfaces
     */
     virtual glm::mat4 getMatrix() const override;
-    void cameraTranslationSpeed(float speed);
-    void cameraRotationSpeed(float speed);
-    void addPos(const glm::vec3& addVec);
-    void rotate(float addYaw, float addPitch);
-
     /**
     * Constructor
     */
-    ViewMatrix(std::shared_ptr<CameraPos> _cameraPo, 
-        std::shared_ptr<CameraFront> _cameraFront, 
-        std::shared_ptr<CameraUp> _cameraUp);
+    ViewMatrix(
+        std::shared_ptr<UnitVector> _cameraPos, 
+        std::shared_ptr<UnitVector> _cameraFront, 
+        std::shared_ptr<UnitVector> _cameraUp);
     ViewMatrix();
     ~ViewMatrix();
 
@@ -31,8 +27,8 @@ private:
     /**
     * Members
     */
-    std::shared_ptr<CameraPos> cameraPos;
-    std::shared_ptr<CameraFront> cameraFront;
-    std::shared_ptr<CameraUp> cameraUp;
+    std::shared_ptr<UnitVector> cameraPos;
+    std::shared_ptr<UnitVector> cameraFront;
+    std::shared_ptr<UnitVector> cameraUp;
 };
 

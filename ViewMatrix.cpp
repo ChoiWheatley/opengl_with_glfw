@@ -9,28 +9,7 @@ glm::mat4 ViewMatrix::getMatrix() const
 	return glm::lookAt(pos, pos + front, up);
 }
 
-void ViewMatrix::cameraTranslationSpeed(float speed)
-{
-	cameraPos->speed = speed;
-}
-
-void ViewMatrix::cameraRotationSpeed(float speed)
-{
-	cameraFront->speed = speed;
-}
-
-void ViewMatrix::addPos(const glm::vec3& addVec)
-{
-	cameraPos->addVec(addVec);
-}
-
-void ViewMatrix::rotate(float addYaw, float addPitch)
-{
-	cameraFront->addPitch(addPitch);
-	cameraFront->addYaw(addYaw);
-}
-
-ViewMatrix::ViewMatrix(std::shared_ptr<CameraPos> _cameraPo, std::shared_ptr<CameraFront> _cameraFront, std::shared_ptr<CameraUp> _cameraUp)
+ViewMatrix::ViewMatrix(std::shared_ptr<UnitVector> _cameraPo, std::shared_ptr<UnitVector> _cameraFront, std::shared_ptr<UnitVector> _cameraUp)
 	: cameraPos{ _cameraPo }, cameraFront{ _cameraFront }, cameraUp{ _cameraUp }
 {}
 
