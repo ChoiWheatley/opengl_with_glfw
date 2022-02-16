@@ -17,7 +17,7 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-#include <stb/stb_image.h>
+#include <stb-master/stb_image.h>
 
 #define VERTEX_BIND_TARGET GL_ARRAY_BUFFER
 

@@ -32,8 +32,8 @@ namespace Constants
 		constexpr float fovMin = 1.f;
 		constexpr float fovMax = 90.f;
 
-		const glm::vec3 initPosition{ 0.f, 0.f, 10.f };
-		const glm::vec3 initUp{ 0.f, 1.f, 0.f };
+		constexpr glm::vec3 initPosition{ 0.f, 0.f, 10.f };
+		constexpr glm::vec3 initUp{ 0.f, 1.f, 0.f };
 		constexpr float initYaw = -90.f;
 		constexpr float initPitch = 0.f;
 		constexpr float translationSpeed = 3.1f;
