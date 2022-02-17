@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Image.h"
 #include "Stub.h"
+#include "Shader.h"
+#include "Constants.h"
 
 static bool image_test();
 static bool shader_test();
@@ -10,7 +12,9 @@ static bool shader_test();
  */
 int test_main(int argc, char ** argv)
 {
-	if (image_test())
+	if (!image_test())
+		return 1;
+	if (!shader_test())
 		return 1;
 	return 0;
 }
@@ -30,4 +34,27 @@ bool image_test()
 
 bool shader_test()
 {
+	//TODO: stub model against Shader
+	//TODO: implement Shader
+	try
+	{
+		const Shader shader{ Constants::Shader::vertexPath,
+			Constants::Shader::fragmentPath };
+		shader.useShaderProgram();
+		shader.setUniformValue("integer", 0);
+		shader.setUniformValue("boolean", true);
+		shader.setUniformValue("float", 3.14f);
+		shader.setUniformValue("vec3", glm::vec3{ 0.f, 1.f, .5f });
+		shader.setUniformValue("mat4", glm::mat4{ 1.f, 1.f, 1.f, 1.f,
+		1.f, 1.f, 1.f, 1.f,
+		1.f, 1.f, 1.f, 1.f,
+		1.f, 1.f, 1.f, 1.f,
+			});
+	}
+	catch (const Shader::err_log& e)
+	{
+		std::cout << e.what() << '\n';
+		return false;
+	}
+	return true;
 }

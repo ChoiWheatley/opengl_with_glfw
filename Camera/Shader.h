@@ -32,11 +32,11 @@ private: // private methods
 	static int compileShader(std::string shaderCode, unsigned int shaderType);
 	static void linkShader(unsigned int id);
 
-private: // errors
+public: // errors
 	class err_log
 	{
 	public:
-		const char * what();
+		const char * what() const;
 		err_log(const char* what);
 		err_log() {}
 	private:
