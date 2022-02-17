@@ -44,7 +44,7 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Node\mesh\source</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
+    <ClCompile Include="TextureI.cpp">
       <Filter>Node\mesh\source</Filter>
     </ClCompile>
     <ClCompile Include="Vertex.cpp">
@@ -100,7 +100,7 @@
     <ClInclude Include="Mesh.h">
       <Filter>Node\mesh\header</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
+    <ClInclude Include="TextureI.h">
       <Filter>Node\mesh\header</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">

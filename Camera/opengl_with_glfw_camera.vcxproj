@@ -40,7 +40,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Stub.h" />
     <ClCompile Include="test_image_texture.cpp" />
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureI.cpp" />
     <ClCompile Include="UnitVector.cpp" />
     <ClCompile Include="use_camera_class_main.cpp" />
     <ClCompile Include="Vertex.cpp" />
@@ -61,7 +61,7 @@
     <ClInclude Include="MyShader.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Structures.h" />
-    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureI.h" />
     <ClInclude Include="UnitVector.h" />
     <ClInclude Include="Projection.h" />
     <ClInclude Include="Vertex.h" />
