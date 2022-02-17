@@ -50,7 +50,7 @@
     <ClCompile Include="Vertex.cpp">
       <Filter>Node\mesh\source</Filter>
     </ClCompile>
-    <ClCompile Include="test_image_texture.cpp">
+    <ClCompile Include="test.cpp">
       <Filter>TestCodes</Filter>
     </ClCompile>
     <ClCompile Include="Image.cpp">

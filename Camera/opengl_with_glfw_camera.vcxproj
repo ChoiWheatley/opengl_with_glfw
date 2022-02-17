@@ -39,7 +39,7 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Stub.h" />
-    <ClCompile Include="test_image_texture.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="TextureI.cpp" />
     <ClCompile Include="UnitVector.cpp" />
     <ClCompile Include="use_camera_class_main.cpp" />
