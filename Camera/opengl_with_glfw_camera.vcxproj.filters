@@ -18,28 +18,46 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>camera\source</Filter>
+      <Filter>Node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="CameraFront.cpp">
-      <Filter>camera\source</Filter>
+      <Filter>Node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="CameraPos.cpp">
-      <Filter>camera\source</Filter>
+      <Filter>Node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="CameraUp.cpp">
-      <Filter>camera\source</Filter>
+      <Filter>Node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="Matrix4.cpp">
-      <Filter>camera\source</Filter>
+      <Filter>Node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="UnitVector.cpp">
-      <Filter>camera\source</Filter>
+      <Filter>Node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="Projection.cpp">
-      <Filter>camera\source</Filter>
+      <Filter>Node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="ViewMatrix.cpp">
-      <Filter>camera\source</Filter>
+      <Filter>Node\camera\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Node\mesh\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Node\mesh\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Node\mesh\source</Filter>
+    </ClCompile>
+    <ClCompile Include="test_image_texture.cpp">
+      <Filter>TestCodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Node\mesh\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Stub.h">
+      <Filter>TestCodes\Stub</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,34 +68,49 @@
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>camera\header</Filter>
+      <Filter>Node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="CameraFront.h">
-      <Filter>camera\header</Filter>
+      <Filter>Node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="CameraPos.h">
-      <Filter>camera\header</Filter>
+      <Filter>Node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="CameraUp.h">
-      <Filter>camera\header</Filter>
+      <Filter>Node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="Matrix4.h">
-      <Filter>camera\header</Filter>
+      <Filter>Node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="UnitVector.h">
-      <Filter>camera\header</Filter>
+      <Filter>Node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="Projection.h">
-      <Filter>camera\header</Filter>
+      <Filter>Node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="ViewMatrix.h">
-      <Filter>camera\header</Filter>
+      <Filter>Node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>constants</Filter>
     </ClInclude>
     <ClInclude Include="Structures.h">
       <Filter>constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Node\mesh\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Node\mesh\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Node\mesh\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Node\mesh\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,14 +134,35 @@
     <Filter Include="constants">
       <UniqueIdentifier>{e7199a91-855b-4e91-8ab0-a49b95619fe0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="camera">
+    <Filter Include="Node">
+      <UniqueIdentifier>{254444eb-0f99-43c0-acce-3f83efb5e5ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node\mesh">
+      <UniqueIdentifier>{67f800dc-660b-4add-9f42-da49a9a8cd5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node\mesh\source">
+      <UniqueIdentifier>{aec99976-718c-4302-98e5-fd6a1162196c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node\mesh\header">
+      <UniqueIdentifier>{fefbaae7-5268-4ad8-a585-fc5b81417ec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node\camera">
       <UniqueIdentifier>{5dd18983-e2e6-49e0-9a5b-ff82e393564b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="camera\header">
+    <Filter Include="Node\camera\header">
       <UniqueIdentifier>{67db9c61-8bc3-46a9-9302-604caaecb5d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="camera\source">
+    <Filter Include="Node\camera\source">
       <UniqueIdentifier>{c6996793-6258-48f4-a404-854e66355a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node\light">
+      <UniqueIdentifier>{0b17d677-d29c-4001-87a7-7ce8b69ee1aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestCodes">
+      <UniqueIdentifier>{e786507f-0bd3-4722-85df-46eea81bd15d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestCodes\Stub">
+      <UniqueIdentifier>{1a0173db-ddb5-4a2f-a2ae-69dba7e9754b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
