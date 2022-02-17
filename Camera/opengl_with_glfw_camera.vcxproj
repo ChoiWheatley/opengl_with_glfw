@@ -38,6 +38,7 @@
     <ClCompile Include="MyShader.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Stub.h" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TextureI.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MyShader.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="Structures.h" />
     <ClInclude Include="TextureI.h" />
     <ClInclude Include="UnitVector.h" />

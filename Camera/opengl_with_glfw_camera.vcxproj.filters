@@ -59,6 +59,9 @@
     <ClCompile Include="Stub.h">
       <Filter>TestCodes\Stub</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Node\mesh\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyShader.h">
@@ -110,6 +113,9 @@
       <Filter>Node\mesh\header</Filter>
     </ClInclude>
     <ClInclude Include="Image.h">
+      <Filter>Node\mesh\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
       <Filter>Node\mesh\header</Filter>
     </ClInclude>
   </ItemGroup>

@@ -28,11 +28,12 @@ private: // member
 class ShaderI
 {
 public: // interfaces
-	virtual void setUniformValue(std::string name, const glm::mat4& value) = 0;
-	virtual void setUniformValue(std::string name, const glm::vec3& value) = 0;
-	virtual void setUniformValue(std::string name, float value) = 0;
-	virtual void setUniformValue(std::string name, int value) = 0;
-	virtual void useShaderProgram() = 0;
+	virtual void setUniformValue(std::string name, const glm::mat4& value) const = 0;
+	virtual void setUniformValue(std::string name, const glm::vec3& value) const = 0;
+	virtual void setUniformValue(std::string name, float value) const = 0;
+	virtual void setUniformValue(std::string name, int value) const = 0;
+	virtual void setUniformValue(std::string name, bool value) const = 0;
+	virtual void useShaderProgram() const = 0;
 };
 
 class TextureI
@@ -41,6 +42,10 @@ public: // interfaces
 
 };
 
+/**
+ * \brief raw vertex, tex_coord 데이터를 vbo에 담아 vao에 리턴하기,
+ * vertex shader layout 번호와 vbo를 알맞게 가리키게 만들기
+ */
 class VertexI
 {
 public: // interfaces
