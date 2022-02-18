@@ -57,11 +57,12 @@ void Shader::useShaderProgram() const
 }
 
 Shader::Shader(const std::string& vertexPath, const std::string& fragPath) :
-	// 1. retrieve the vertex/fragment source code from filepath
-	vShaderCode(Shader::getShaderCode(vertexPath)),
-	fShaderCode(Shader::getShaderCode(fragPath)),
 	id(glCreateProgram())
 {
+	// 1. retrieve the vertex/fragment source code from filepath
+	vShaderCode = Shader::getShaderCode(vertexPath);
+	fShaderCode = Shader::getShaderCode(fragPath);
+
 	// 2. compile shader from shader code
 	const unsigned int vertexShader = Shader::compileShader(this->vShaderCode.c_str(), GL_VERTEX_SHADER);
 	const unsigned int fragShader = Shader::compileShader(this->fShaderCode.c_str(), GL_FRAGMENT_SHADER);
