@@ -33,7 +33,6 @@ private:
 	void linkShader(const GLuint ID) const;
 	GLuint getUniformLocation(const std::string& name) const;
 
-	/*for throwing errors*/
 	class err_with_info_log {
 	public:
 		const char* what();

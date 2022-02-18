@@ -4,6 +4,8 @@
 #include "Shader.h"
 #include "Constants.h"
 
+#define PRINT_FUNC std::cerr<<"testing..."<<__func__<<'\n';
+
 static bool image_test();
 static bool shader_test();
 /**
@@ -12,6 +14,7 @@ static bool shader_test();
  */
 int test_main(int argc, char ** argv)
 {
+	PRINT_FUNC
 	if (!image_test())
 		return 1;
 	if (!shader_test())
@@ -21,6 +24,7 @@ int test_main(int argc, char ** argv)
 
 bool image_test()
 {
+	PRINT_FUNC
 	const Image img{Stub::Image::filename};
 	if (!img.data)
 	{
@@ -34,6 +38,8 @@ bool image_test()
 
 bool shader_test()
 {
+	PRINT_FUNC
+	std::cerr << __func__ << '\n';
 	//TODO: stub model against Shader
 	//TODO: implement Shader
 	try
