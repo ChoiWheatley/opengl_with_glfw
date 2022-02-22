@@ -4,7 +4,6 @@
 #include <fstream>
 #include <sstream>
 #include <glm/gtc/type_ptr.hpp>
-#include <glad/glad.h>
 #include "Mesh.h"
 
 /**
@@ -28,8 +27,6 @@ public: // interfaces
 
 public: // constructor and destructor
 	Shader(const std::string& vertexPath, const std::string& fragPath);
-
-	~Shader() override;
 
 private: // member
 	std::string vShaderCode;

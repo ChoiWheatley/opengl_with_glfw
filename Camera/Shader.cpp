@@ -69,11 +69,6 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragPath) :
 	}
 }
 
-Shader::~Shader()
-{
-	glDeleteShader(this->id);
-}
-
 int Shader::getUniformLocation(const unsigned id, const std::string& name)
 {
 	return glGetUniformLocation(id, name.c_str());
@@ -125,11 +120,11 @@ int Shader::compileShader(const char* shaderCode, unsigned int shaderType)
 void Shader::linkShader(unsigned id)
 {
 	int success = 0;
-	char infoLog[BUFSIZ];
 	glLinkProgram(id);
 	glGetProgramiv(id, GL_LINK_STATUS, &success);
 	if (!success)
 	{
+		char infoLog[BUFSIZ];
 		glGetProgramInfoLog(id, BUFSIZ, nullptr, infoLog);
 		throw err_link_shader{ infoLog };
 	}

@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include <string>
-#include <glm/gtc/type_ptr.hpp>
 #include <glad/glad.h>
 #include "Node.h"
 
@@ -13,7 +12,6 @@ class Mesh : public Node
 {
 public: // interfaces
 	virtual glm::mat4 getCoordSpace() override;
-	int getVao();
 
 public: // constructor
 	Mesh(std::shared_ptr<ShaderI> shader,
@@ -29,9 +27,7 @@ private: // member
 // shader를 관리하는 객체의 역할을 정의하는 인터페이스.
 class ShaderI
 {
-public:
-	virtual ~ShaderI() = default;
-	// interfaces
+public:// interfaces
 	/**
 	 * \brief Shader code --> Shader program
 	 */
