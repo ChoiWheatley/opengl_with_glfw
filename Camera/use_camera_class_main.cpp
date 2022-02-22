@@ -155,7 +155,7 @@ int use_camera_class_main(int argc, char** argv)
 	glEnableVertexAttribArray(0);		/*layout (location = 0) in aPos*/
 	glVertexAttribPointer(
 		1								/*position*/
-		, 3								/*size in number of components*/
+		, 2								/*size in number of components*/
 		, GL_FLOAT						/*type*/
 		, GL_FALSE						/*normalized*/
 		, 5 * sizeof(float)				/*stride in bytes*/

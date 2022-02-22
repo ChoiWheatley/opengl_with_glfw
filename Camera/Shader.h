@@ -24,12 +24,6 @@ public: // interfaces
 	void setUniformValue(const std::string& name, float value) const override;
 	void setUniformValue(const std::string& name, int value) const override;
 	void setUniformValue(const std::string& name, bool value) const override;
-	void setLocationValue(int no, const glm::mat4& value) const override;
-	void setLocationValue(int no, const glm::vec3& value) const override;
-	void setLocationValue(int no, const glm::vec2& value) const override;
-	void setLocationValue(int no, const float& value) const override;
-	void setLocationValue(int no, const int& value) const override;
-	void setLocationValue(int no, const bool& value) const override;
 	void useShaderProgram() const override;
 
 public: // constructor and destructor
@@ -43,7 +37,7 @@ private: // member
 	const unsigned int id;
 
 private: // private methods
-	static unsigned int getUniformLocation(const unsigned id, const std::string& name);
+	static int getUniformLocation(const unsigned id, const std::string& name);
 	static std::string getShaderCode(const std::string& shaderPath);
 	static int compileShader(const char* shaderCode, unsigned int shaderType);
 	static void linkShader(unsigned int id);

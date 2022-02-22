@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
 #include <string>
+#include <glm/gtc/type_ptr.hpp>
+#include <glad/glad.h>
 #include "Node.h"
 
 class ShaderI;
@@ -45,23 +47,12 @@ public:
 	virtual void setUniformValue(const std::string& name, float value) const = 0;
 	virtual void setUniformValue(const std::string& name, int value) const = 0;
 	virtual void setUniformValue(const std::string& name, bool value) const = 0;
-	/**
-	 * \brief change location value. for example: `layout (location = 0) in vec3 position;`
-	 * \param no layout location number
-	 * \param value desired value
-	 */
-	virtual void setLocationValue(int no, const glm::mat4& value) const = 0;
-	virtual void setLocationValue(int no, const glm::vec3& value) const = 0;
-	virtual void setLocationValue(int no, const glm::vec2& value) const = 0;
-	virtual void setLocationValue(int no, const float& value) const = 0;
-	virtual void setLocationValue(int no, const int& value) const = 0;
-	virtual void setLocationValue(int no, const bool& value) const = 0;
 };
 
 class TextureI
 {
 public: // interfaces
-
+	virtual const char* getTextureImg() const = 0;
 };
 
 /**
@@ -71,5 +62,6 @@ public: // interfaces
 class VertexI
 {
 public: // interfaces
+	virtual void setVertexAttribute(GLint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void * pointer) = 0;
 
 };

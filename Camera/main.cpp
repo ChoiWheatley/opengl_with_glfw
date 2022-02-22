@@ -6,5 +6,5 @@ extern int test_main(int argc, char ** argv);
 
 int main(int argc, char** argv)
 {
-	return test_main(argc, argv);
+	return use_camera_class_main(argc, argv);
 }

@@ -5,50 +5,32 @@
 
 void Shader::setUniformValue(const std::string& name, const glm::mat4& value) const
 {
+	glUniformMatrix4fv(getUniformLocation(this->id, name), 1, GL_FALSE, glm::value_ptr(value));
 }
 
 void Shader::setUniformValue(const std::string& name, const glm::vec3& value) const
 {
+	glUniform3fv(getUniformLocation(this->id, name), 1, glm::value_ptr(value));
 }
 
 void Shader::setUniformValue(const std::string& name, const glm::vec2& value) const
 {
+	glUniform2fv(getUniformLocation(this->id, name), 1, glm::value_ptr(value));
 }
 
 void Shader::setUniformValue(const std::string& name, float value) const
 {
+	glUniform1f(getUniformLocation(this->id, name), value);
 }
 
 void Shader::setUniformValue(const std::string& name, int value) const
 {
+	glUniform1i(getUniformLocation(this->id, name), value);
 }
 
 void Shader::setUniformValue(const std::string& name, bool value) const
 {
-}
-
-void Shader::setLocationValue(int no, const glm::mat4& value) const
-{
-}
-
-void Shader::setLocationValue(int no, const glm::vec3& value) const
-{
-}
-
-void Shader::setLocationValue(int no, const glm::vec2& value) const
-{
-}
-
-void Shader::setLocationValue(int no, const float& value) const
-{
-}
-
-void Shader::setLocationValue(int no, const int& value) const
-{
-}
-
-void Shader::setLocationValue(int no, const bool& value) const
-{
+	glUniform1i(getUniformLocation(this->id, name), value);
 }
 
 void Shader::useShaderProgram() const
@@ -92,7 +74,7 @@ Shader::~Shader()
 	glDeleteShader(this->id);
 }
 
-unsigned int Shader::getUniformLocation(const unsigned id, const std::string& name)
+int Shader::getUniformLocation(const unsigned id, const std::string& name)
 {
 	return glGetUniformLocation(id, name.c_str());
 }
