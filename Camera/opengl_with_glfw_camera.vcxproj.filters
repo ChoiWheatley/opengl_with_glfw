@@ -2,97 +2,87 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="glad.c" />
-    <ClCompile Include="main.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="MyShader.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="vertices.h">
-      <Filter>header</Filter>
-    </ClCompile>
-    <ClCompile Include="camera_main.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="use_camera_class_main.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Node\camera\source</Filter>
+      <Filter>entity\node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="CameraFront.cpp">
-      <Filter>Node\camera\source</Filter>
+      <Filter>entity\node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="CameraPos.cpp">
-      <Filter>Node\camera\source</Filter>
+      <Filter>entity\node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="CameraUp.cpp">
-      <Filter>Node\camera\source</Filter>
+      <Filter>entity\node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="Matrix4.cpp">
-      <Filter>Node\camera\source</Filter>
+      <Filter>entity\node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="UnitVector.cpp">
-      <Filter>Node\camera\source</Filter>
+      <Filter>entity\node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="Projection.cpp">
-      <Filter>Node\camera\source</Filter>
+      <Filter>entity\node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="ViewMatrix.cpp">
-      <Filter>Node\camera\source</Filter>
+      <Filter>entity\node\camera\source</Filter>
     </ClCompile>
     <ClCompile Include="test.cpp">
-      <Filter>TestCodes</Filter>
+      <Filter>test</Filter>
     </ClCompile>
     <ClCompile Include="Stub.h">
-      <Filter>TestCodes\Stub</Filter>
-    </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>Node\mesh_impl</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Node\mesh_impl</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureI.cpp">
-      <Filter>Node\mesh_impl</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Node\mesh_impl</Filter>
+      <Filter>test\stub</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>Node\mesh</Filter>
+      <Filter>entity\node\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>entity\node\mesh_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>entity\node\mesh_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>entity\node\mesh_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>entity\node\mesh_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="vertices.h" />
+    <ClCompile Include="MyShader.cpp" />
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="use_camera_class_main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_main.cpp">
+      <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyShader.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="headers.h">
-      <Filter>header</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Node\camera\header</Filter>
+      <Filter>entity\node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="CameraFront.h">
-      <Filter>Node\camera\header</Filter>
+      <Filter>entity\node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="CameraPos.h">
-      <Filter>Node\camera\header</Filter>
+      <Filter>entity\node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="CameraUp.h">
-      <Filter>Node\camera\header</Filter>
+      <Filter>entity\node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="Matrix4.h">
-      <Filter>Node\camera\header</Filter>
+      <Filter>entity\node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="UnitVector.h">
-      <Filter>Node\camera\header</Filter>
+      <Filter>entity\node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="Projection.h">
-      <Filter>Node\camera\header</Filter>
+      <Filter>entity\node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="ViewMatrix.h">
-      <Filter>Node\camera\header</Filter>
+      <Filter>entity\node\camera\header</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>constants</Filter>
@@ -101,23 +91,34 @@
       <Filter>constants</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
-      <Filter>Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Node\mesh_impl</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureI.h">
-      <Filter>Node\mesh_impl</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Node\mesh_impl</Filter>
-    </ClInclude>
-    <ClInclude Include="Image.h">
-      <Filter>Node\mesh_impl</Filter>
+      <Filter>entity\node</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>Node\mesh</Filter>
+      <Filter>entity\node\mesh</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderI.h">
+      <Filter>entity\node\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexI.h">
+      <Filter>entity\node\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureI.h">
+      <Filter>entity\node\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>entity\node\mesh_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>entity\node\mesh_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>entity\node\mesh_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>entity\node\mesh_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="headers.h" />
+    <ClInclude Include="MyShader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.frag">
@@ -128,44 +129,44 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="source">
-      <UniqueIdentifier>{5e441678-c9de-463c-af7e-9dd9473a5154}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="header">
-      <UniqueIdentifier>{bf8f29e4-eb6b-466a-b7c3-ddf66771a48c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="shader">
       <UniqueIdentifier>{f9e7b035-e59b-4f82-aa87-ab59782021b3}</UniqueIdentifier>
     </Filter>
     <Filter Include="constants">
       <UniqueIdentifier>{e7199a91-855b-4e91-8ab0-a49b95619fe0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Node">
+    <Filter Include="main">
+      <UniqueIdentifier>{8c78f3ac-904f-4c0c-b90c-6ba2e089ebbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entity">
+      <UniqueIdentifier>{326b9cc2-1e48-4f71-9758-70cac4edf0ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entity\node">
       <UniqueIdentifier>{254444eb-0f99-43c0-acce-3f83efb5e5ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Node\mesh">
+    <Filter Include="entity\node\mesh">
       <UniqueIdentifier>{67f800dc-660b-4add-9f42-da49a9a8cd5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Node\camera">
+    <Filter Include="entity\node\camera">
       <UniqueIdentifier>{5dd18983-e2e6-49e0-9a5b-ff82e393564b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Node\camera\header">
+    <Filter Include="entity\node\camera\header">
       <UniqueIdentifier>{67db9c61-8bc3-46a9-9302-604caaecb5d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Node\camera\source">
+    <Filter Include="entity\node\camera\source">
       <UniqueIdentifier>{c6996793-6258-48f4-a404-854e66355a1b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Node\light">
+    <Filter Include="entity\node\light">
       <UniqueIdentifier>{0b17d677-d29c-4001-87a7-7ce8b69ee1aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TestCodes">
+    <Filter Include="entity\node\mesh_impl">
+      <UniqueIdentifier>{87ceb10f-b20d-4aa4-a68b-f0bea69dafee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
       <UniqueIdentifier>{e786507f-0bd3-4722-85df-46eea81bd15d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TestCodes\Stub">
+    <Filter Include="test\stub">
       <UniqueIdentifier>{1a0173db-ddb5-4a2f-a2ae-69dba7e9754b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Node\mesh_impl">
-      <UniqueIdentifier>{87ceb10f-b20d-4aa4-a68b-f0bea69dafee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

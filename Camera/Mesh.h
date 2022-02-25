@@ -1,63 +1,36 @@
 #pragma once
 #include <memory>
-#include <string>
-#include <glad/glad.h>
 #include "Node.h"
-
-class ShaderI;
-class TextureI;
-class VertexI;
+#include "ShaderI.h"
+#include "VertexI.h"
+#include "TextureI.h"
 
 class Mesh : public Node
 {
 public: // interfaces
 	virtual glm::mat4 getCoordSpace() override;
 
+
 public: // constructor
-	Mesh(std::shared_ptr<ShaderI> shader,
-		std::shared_ptr<TextureI> texture,
-		std::shared_ptr<VertexI> vertex);
+	Mesh(
+		std::unique_ptr<ShaderI> shader,
+		std::unique_ptr<TextureI> texture,
+		std::unique_ptr<VertexI> vertex
+	);
+	~Mesh();
 
 private: // member
-	std::shared_ptr<ShaderI> shader;
-	std::shared_ptr<TextureI> texture;
-	std::shared_ptr<VertexI> vertex;
-};
+	std::unique_ptr<ShaderI> shader_;
+	std::unique_ptr<TextureI> texture_;
+	std::unique_ptr<VertexI> vertex_;
+	glm::vec3 pos_;
+	glm::vec3 axis_;
+	float angle_;
 
-// shader를 관리하는 객체의 역할을 정의하는 인터페이스.
-class ShaderI
-{
-public:// interfaces
-	/**
-	 * \brief Shader code --> Shader program
-	 */
-	virtual void useShaderProgram() const = 0;
-	/**
-	 * \brief change uniform value
-	 * \param name string literal pointing GLSL's uniform variable
-	 * \param value value
-	 */
-	virtual void setUniformValue(const std::string& name, const glm::mat4& value) const = 0;
-	virtual void setUniformValue(const std::string& name, const glm::vec3& value) const = 0;
-	virtual void setUniformValue(const std::string& name, const glm::vec2& value) const = 0;
-	virtual void setUniformValue(const std::string& name, float value) const = 0;
-	virtual void setUniformValue(const std::string& name, int value) const = 0;
-	virtual void setUniformValue(const std::string& name, bool value) const = 0;
-};
-
-class TextureI
-{
-public: // interfaces
-	virtual const char* getTextureImg() const = 0;
-};
-
-/**
- * \brief raw vertex, tex_coord 데이터를 vbo에 담아 vao에 리턴하기,
- * vertex shader layout 번호와 vbo를 알맞게 가리키게 만들기
- */
-class VertexI
-{
-public: // interfaces
-	virtual void setVertexAttribute(GLint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void * pointer) = 0;
+private: // method
+	static glm::mat4 getMatrix(const glm::vec3& pos, const glm::vec3& axis, const float angle);
 
 };
+
+
+

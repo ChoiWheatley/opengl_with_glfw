@@ -1,5 +1,4 @@
 #pragma once
-#include <stb/stb_image.h>
 struct Image
 {
     Image(const char* filename);
@@ -10,5 +9,7 @@ struct Image
     int width;
     int height;
     int nrChannels;
+
+	class err_load_failed{}; // TODO: Error 클래스에서 구현
 };
 
