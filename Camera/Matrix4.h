@@ -1,11 +1,5 @@
 #pragma once
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include <glm/gtx/quaternion.hpp>
-
-#include "Constants.h"
 /*
 * Superclass for `ViewFrustum` and `ViewMatrix`
 * 원래는 Projection과 ViewMatrix 모두를 이 타입으로 

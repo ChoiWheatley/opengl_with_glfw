@@ -33,7 +33,6 @@
     <ClCompile Include="CameraUp.cpp" />
     <ClCompile Include="camera_main.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MyShader.cpp" />
     <ClCompile Include="glad.c" />

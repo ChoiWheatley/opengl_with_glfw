@@ -1,9 +1,11 @@
 #include "Mesh.h"
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Camera.h"
+
 glm::mat4 Mesh::getCoordSpace()
 {
-    return glm::mat4();
+    return getMatrix(*matrix_);
 }
 
 Mesh::Mesh(std::unique_ptr<ShaderI> shader, std::unique_ptr<TextureI> texture, std::unique_ptr<VertexI> vertex)
@@ -17,10 +19,8 @@ Mesh::~Mesh()
 	vertex_.reset();
 }
 
-glm::mat4 Mesh::getMatrix(const glm::vec3& pos, const glm::vec3& axis, const float angle)
+glm::mat4 Mesh::getMatrix(const Matrix4& matrix)
 {
-	glm::mat4 ret(1.f);
-	ret = glm::translate(ret, pos);
-	ret = glm::rotate(ret, angle, axis);
-	return ret;
+	return matrix.getMatrix();
 }
+

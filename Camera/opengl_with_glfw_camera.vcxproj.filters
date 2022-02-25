@@ -2,30 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="glad.c" />
-    <ClCompile Include="Camera.cpp">
-      <Filter>entity\node\camera\source</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraFront.cpp">
-      <Filter>entity\node\camera\source</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraPos.cpp">
-      <Filter>entity\node\camera\source</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraUp.cpp">
-      <Filter>entity\node\camera\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix4.cpp">
-      <Filter>entity\node\camera\source</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitVector.cpp">
-      <Filter>entity\node\camera\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Projection.cpp">
-      <Filter>entity\node\camera\source</Filter>
-    </ClCompile>
-    <ClCompile Include="ViewMatrix.cpp">
-      <Filter>entity\node\camera\source</Filter>
-    </ClCompile>
     <ClCompile Include="test.cpp">
       <Filter>test</Filter>
     </ClCompile>
@@ -58,32 +34,29 @@
     <ClCompile Include="camera_main.cpp">
       <Filter>main</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>entity\node\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFront.cpp">
+      <Filter>entity\node\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraPos.cpp">
+      <Filter>entity\node\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraUp.cpp">
+      <Filter>entity\node\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Projection.cpp">
+      <Filter>entity\node\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitVector.cpp">
+      <Filter>entity\node\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewMatrix.cpp">
+      <Filter>entity\node\camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h">
-      <Filter>entity\node\camera\header</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraFront.h">
-      <Filter>entity\node\camera\header</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraPos.h">
-      <Filter>entity\node\camera\header</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraUp.h">
-      <Filter>entity\node\camera\header</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix4.h">
-      <Filter>entity\node\camera\header</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitVector.h">
-      <Filter>entity\node\camera\header</Filter>
-    </ClInclude>
-    <ClInclude Include="Projection.h">
-      <Filter>entity\node\camera\header</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewMatrix.h">
-      <Filter>entity\node\camera\header</Filter>
-    </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>constants</Filter>
     </ClInclude>
@@ -119,6 +92,30 @@
     </ClInclude>
     <ClInclude Include="headers.h" />
     <ClInclude Include="MyShader.h" />
+    <ClInclude Include="Camera.h">
+      <Filter>entity\node\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFront.h">
+      <Filter>entity\node\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraPos.h">
+      <Filter>entity\node\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraUp.h">
+      <Filter>entity\node\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Projection.h">
+      <Filter>entity\node\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitVector.h">
+      <Filter>entity\node\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewMatrix.h">
+      <Filter>entity\node\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4.h">
+      <Filter>entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.frag">
@@ -149,12 +146,6 @@
     </Filter>
     <Filter Include="entity\node\camera">
       <UniqueIdentifier>{5dd18983-e2e6-49e0-9a5b-ff82e393564b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entity\node\camera\header">
-      <UniqueIdentifier>{67db9c61-8bc3-46a9-9302-604caaecb5d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entity\node\camera\source">
-      <UniqueIdentifier>{c6996793-6258-48f4-a404-854e66355a1b}</UniqueIdentifier>
     </Filter>
     <Filter Include="entity\node\light">
       <UniqueIdentifier>{0b17d677-d29c-4001-87a7-7ce8b69ee1aa}</UniqueIdentifier>

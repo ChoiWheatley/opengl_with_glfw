@@ -4,6 +4,7 @@
 #include "ShaderI.h"
 #include "VertexI.h"
 #include "TextureI.h"
+#include "Matrix4.h"
 
 class Mesh : public Node
 {
@@ -23,12 +24,10 @@ private: // member
 	std::unique_ptr<ShaderI> shader_;
 	std::unique_ptr<TextureI> texture_;
 	std::unique_ptr<VertexI> vertex_;
-	glm::vec3 pos_;
-	glm::vec3 axis_;
-	float angle_;
+	std::unique_ptr<Matrix4> matrix_;
 
 private: // method
-	static glm::mat4 getMatrix(const glm::vec3& pos, const glm::vec3& axis, const float angle);
+	static glm::mat4 getMatrix(const Matrix4& matrix);
 
 };
 
