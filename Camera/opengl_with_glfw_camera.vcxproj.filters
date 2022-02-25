@@ -55,6 +55,9 @@
     <ClCompile Include="ViewMatrix.cpp">
       <Filter>entity\node\camera</Filter>
     </ClCompile>
+    <ClCompile Include="PosAxisAngle.cpp">
+      <Filter>entity\node\mesh_impl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="Matrix4.h">
       <Filter>entity</Filter>
+    </ClInclude>
+    <ClInclude Include="PosAxisAngle.h">
+      <Filter>entity\node\mesh_impl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

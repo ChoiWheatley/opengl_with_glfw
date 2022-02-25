@@ -37,6 +37,7 @@
     <ClCompile Include="MyShader.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PosAxisAngle.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Stub.h" />
     <ClCompile Include="test.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MyShader.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="PosAxisAngle.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderI.h" />
     <ClInclude Include="Structures.h" />
