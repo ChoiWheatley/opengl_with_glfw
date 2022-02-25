@@ -4,6 +4,8 @@
 #include "Image.h"
 #include "Shader.h"
 #include "Constants.h"
+#include "ShaderFactory.hpp"
+#include "ImageFactory.hpp"
 
 #define PRINT_FUNC std::cerr<<"testing..."<<__func__<<'\n'
 #define PRINT_SUCCESS std::cerr<<__func__<< " have successed!\n"
@@ -19,9 +21,9 @@ int test_main(int argc, char ** argv)
 {
 	PRINT_FUNC;
 	auto window = glfw_init();
-	if (!image_test())
-		return 1;
 	if (!shader_test())
+		return 1;
+	if (!image_test())
 		return 1;
 
 	while (!glfwWindowShouldClose(window)) {}
@@ -32,7 +34,7 @@ int test_main(int argc, char ** argv)
 bool image_test()
 {
 	PRINT_FUNC;
-	const Image img{Constants::textures[0].textureFileName.c_str()};
+	const auto img= *ImageFactory::make(Constants::textures[0].textureFileName.c_str());
 	if (!img.data)
 	{
 		return false;
@@ -52,8 +54,12 @@ bool shader_test()
 	//TODO: implement Shader
 	try
 	{
-		const Shader shader{ Constants::Shader::vertexPath,
-			Constants::Shader::fragmentPath };
+		//const Shader shader{ Constants::Shader::vertexPath,
+		//	Constants::Shader::fragmentPath };
+		const auto shader = *ShaderFactory::make(
+			Constants::Shader::vertexPath,
+			Constants::Shader::fragmentPath
+		);
 		shader.useShaderProgram();
 		shader.setUniformValue("integer", 0);
 		shader.setUniformValue("boolean", true);

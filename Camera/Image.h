@@ -1,4 +1,5 @@
 #pragma once
+#include <exception>
 struct Image
 {
     Image(const char* filename);
@@ -10,6 +11,6 @@ struct Image
     int height;
     int nrChannels;
 
-	class err_load_failed{}; // TODO: Error 클래스에서 구현
+	class err_img_load_failed : std::exception{}; // TODO: Error 클래스에서 구현
 };
 

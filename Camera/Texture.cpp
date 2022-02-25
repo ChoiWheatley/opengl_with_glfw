@@ -3,14 +3,11 @@
 
 const char* Texture::getTextureImg() const
 {
+	// TODO: 구현
+	return "dddd";
 }
 
 Texture::Texture(const Image& img): img{ img }
-{}
-
-// TODO: Factory 패턴을 활용하여 종속성을 관리하자!
-Texture::Texture(const char* filename)
-	:img{std::move(Image{filename})}
 {}
 
 Texture::~Texture() = default;

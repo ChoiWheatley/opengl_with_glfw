@@ -1,4 +1,8 @@
 #include "Image.h"
+
+#include <stb/stb_image.h>
+#include "Image.h"
+
 Image::Image(const char* filename)
 	: filename(filename)
 {
@@ -6,11 +10,9 @@ Image::Image(const char* filename)
 	data = stbi_load(filename, &width, &height, &nrChannels, 0);
 	if (!data)
 	{
-
+		throw err_img_load_failed{};
 	}
 }
 
 Image::~Image()
-{
-	delete data;
-}
+= default;

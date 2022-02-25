@@ -9,8 +9,7 @@ public: // interface
 	const char* getTextureImg() const override;
 public: // constructor
 	Texture(const Image& img);
-	explicit Texture(const char* filename);
 	~Texture() override;
 private: // member
-	const Image& img;
+	const Image img;
 };

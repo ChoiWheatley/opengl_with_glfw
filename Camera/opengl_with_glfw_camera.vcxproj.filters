@@ -122,6 +122,21 @@
     <ClInclude Include="PosAxisAngle.h">
       <Filter>entity\node\mesh_impl</Filter>
     </ClInclude>
+    <ClInclude Include="MeshFactory.hpp">
+      <Filter>entity\factory</Filter>
+    </ClInclude>
+    <ClInclude Include="PosAxisAngleFactory.hpp">
+      <Filter>entity\factory</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureFactory.hpp">
+      <Filter>entity\factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageFactory.hpp">
+      <Filter>entity\factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderFactory.hpp">
+      <Filter>entity\factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.frag">
@@ -164,6 +179,9 @@
     </Filter>
     <Filter Include="test\stub">
       <UniqueIdentifier>{1a0173db-ddb5-4a2f-a2ae-69dba7e9754b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entity\factory">
+      <UniqueIdentifier>{7c9b6b84-7cbd-4502-8028-c36fde4d3b08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
