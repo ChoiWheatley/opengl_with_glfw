@@ -6,7 +6,8 @@
  */
 class VertexI
 {
-public: // interfaces
+public:
 	virtual void setVertexAttribute(GLint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void * pointer) = 0;
 
+	virtual ~VertexI() = default;
 };

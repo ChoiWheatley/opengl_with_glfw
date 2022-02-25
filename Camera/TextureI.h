@@ -7,4 +7,6 @@ class TextureI
 {
 public: // interfaces
 	virtual const char* getTextureImg() const = 0;
+
+	virtual ~TextureI() = default;
 };

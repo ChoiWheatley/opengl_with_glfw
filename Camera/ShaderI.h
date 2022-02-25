@@ -20,4 +20,6 @@ public:// interfaces
 	virtual void setUniformValue(const std::string& name, float value) const = 0;
 	virtual void setUniformValue(const std::string& name, int value) const = 0;
 	virtual void setUniformValue(const std::string& name, bool value) const = 0;
+
+	virtual ~ShaderI() = default;
 };

@@ -18,7 +18,7 @@ public: // constructor
 		std::unique_ptr<TextureI> texture,
 		std::unique_ptr<VertexI> vertex
 	);
-	~Mesh();
+	~Mesh() override;
 
 private: // member
 	std::unique_ptr<ShaderI> shader_;

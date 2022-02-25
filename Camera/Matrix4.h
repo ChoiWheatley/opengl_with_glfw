@@ -14,5 +14,7 @@ public:
 	* Interfaces
 	*/
 	virtual glm::mat4 getMatrix() const = 0;
+
+	virtual ~Matrix4() = default;
 };
 

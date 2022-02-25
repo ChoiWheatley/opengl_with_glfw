@@ -12,6 +12,7 @@ public: // interface
 public: // constructor
 	Texture(const Image& img) : img{ img } {}
 	Texture(const char* filename);
+	~Texture() override = default;
 private:
 	const Image& img;
 };

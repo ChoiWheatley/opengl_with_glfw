@@ -27,6 +27,7 @@ public: // interfaces
 
 public: // constructor and destructor
 	Shader(const std::string& vertexPath, const std::string& fragPath);
+	~Shader() override = default;
 
 private: // member
 	std::string vShaderCode;
