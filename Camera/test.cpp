@@ -89,8 +89,11 @@ bool texture_test()
 	const auto texture2 = TextureFactory::make(std::move(img));	// 소유권이 img에서 texture2로 넘어감.
 	std::cout << "img has lost own occupant address is : " << img.get() << ". Please don't use this\n";
 
-	std::cout << texture1->getTextureImg() << '\n';
-	std::cout << texture2->getTextureImg() << '\n';
+	texture1->activeTexture();
+	texture1->bindTexture();
+	texture2->activeTexture();
+	texture2->bindTexture();
+
 	PRINT_SUCCESS;
 	return true;
 }
