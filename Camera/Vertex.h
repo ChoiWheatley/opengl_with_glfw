@@ -1,6 +1,9 @@
 #pragma once
 #include "VertexI.h"
 
+/**
+ * \brief TODO: Vertex implementation
+ */
 class Vertex
 	: VertexI
 {
