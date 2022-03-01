@@ -61,10 +61,12 @@
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshFactory.hpp" />
+    <ClInclude Include="MeshPainter.hpp" />
     <ClInclude Include="MyShader.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="PosAxisAngle.h" />
     <ClInclude Include="PosAxisAngleFactory.hpp" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderFactory.hpp" />
     <ClInclude Include="ShaderI.h" />
@@ -81,6 +83,9 @@
   <ItemGroup>
     <None Include="fragment.frag" />
     <None Include="vertex.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="opengl_with_glfw_camera.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

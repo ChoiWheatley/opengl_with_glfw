@@ -17,6 +17,7 @@ Mesh::~Mesh()
 	shader_.reset();
 	texture_.reset();
 	vertex_.reset();
+	matrix_.reset();
 }
 
 glm::mat4 Mesh::getMatrix(const Matrix4& matrix)

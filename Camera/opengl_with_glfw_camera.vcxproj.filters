@@ -137,6 +137,10 @@
     <ClInclude Include="ShaderFactory.hpp">
       <Filter>entity\factory</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="MeshPainter.hpp">
+      <Filter>user</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.frag">
@@ -183,5 +187,11 @@
     <Filter Include="entity\factory">
       <UniqueIdentifier>{7c9b6b84-7cbd-4502-8028-c36fde4d3b08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="user">
+      <UniqueIdentifier>{f879575f-8941-463c-9f27-a491c6ce7a6b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="opengl_with_glfw_camera.rc" />
   </ItemGroup>
 </Project>
