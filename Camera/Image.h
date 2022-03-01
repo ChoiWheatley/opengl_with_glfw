@@ -1,16 +1,18 @@
 #pragma once
-#include <exception>
+/**
+ * \brief Image uses std_images.h to load any image formats with file name.
+ */
 struct Image
 {
-    Image(const char* filename);
+	explicit Image(const char* filename, bool set_flip_vertically_on_load = true);
+	Image() = default;
 	~Image();
 
-    const char * filename;
-    const unsigned char * data;
-    int width;
-    int height;
-    int nrChannels;
-
-	class err_img_load_failed : std::exception{}; // TODO: Error 클래스에서 구현
+	const char* filename = nullptr;
+	const unsigned char* data = nullptr;
+	int width = 0;
+	int height = 0;
+	int nrChannels = 0;
+	bool set_flip_vertically_on_load = true;
 };
 
