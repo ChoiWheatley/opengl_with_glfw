@@ -30,6 +30,7 @@ public: // constructor and destructor
 	~Shader() override = default;
 
 private: // member
+	// TODO: vertex shader code, fragment shader code를 서로 분리하는 건 어떻게 생각함?
 	std::string vShaderCode;
 	std::string fShaderCode;
 	const unsigned int id;

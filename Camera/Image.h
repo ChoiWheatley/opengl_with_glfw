@@ -5,7 +5,7 @@
 struct Image
 {
 	explicit Image(const char* filename, bool set_flip_vertically_on_load = true);
-	Image() = default;
+	Image() = delete;
 	~Image();
 
 	const char* filename = nullptr;

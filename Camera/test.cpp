@@ -1,17 +1,17 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "Image.h"
-#include "Shader.h"
-#include "Constants.h"
 #include "ShaderFactory.hpp"
 #include "ImageFactory.hpp"
+#include "TextureFactory.hpp"
+#include "Stub.h"
 
 #define PRINT_FUNC std::cerr<<"testing..."<<__func__<<'\n'
 #define PRINT_SUCCESS std::cerr<<__func__<< " have successed!\n"
 
 static bool image_test();
 static bool shader_test();
+static bool texture_test();
 static GLFWwindow* glfw_init();
 /**
  * \brief Image 객체가 올바르게 데이터를 로드하는가?
@@ -20,13 +20,24 @@ static GLFWwindow* glfw_init();
 int test_main(int argc, char ** argv)
 {
 	PRINT_FUNC;
-	auto window = glfw_init();
-	if (!shader_test())
-		return 1;
-	if (!image_test())
-		return 1;
+	try
+	{
+		const auto window = glfw_init();
+		if (window == nullptr)
+			return 1;
+		if (!shader_test())
+			return 1;
+		if (!image_test())
+			return 1;
+		if (!texture_test())
+			return 1;
 
-	while (!glfwWindowShouldClose(window)) {}
+		while (!glfwWindowShouldClose(window)) {}
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << typeid(e).name() << " :: " << e.what() << '\n';
+	}
 	PRINT_SUCCESS;
 	return 0;
 }
@@ -34,21 +45,13 @@ int test_main(int argc, char ** argv)
 bool image_test()
 {
 	PRINT_FUNC;
-	try
+	const auto img = ImageFactory::make(Stub::texture.textureFileName.c_str());
+	if (!img->data)
 	{
-		const auto img = ImageFactory::make(Constants::textures[0].textureFileName.c_str());
-		if (!img->data)
-		{
-			throw std::runtime_error{"image has no data->"};
-		}
-		std::cerr << "nrChannel = " << img->nrChannels << '\n';
-		std::cerr << "(width, height)= (" << img->width << ", " << img->height << ")\n";
+		throw std::runtime_error{ "image has no data->" };
 	}
-	catch (std::exception& e)
-	{
-		std::cerr << "ERROR: " << e.what() << '\n';
-		return false;
-	}
+	std::cerr << "nrChannel = " << img->nrChannels << '\n';
+	std::cerr << "(width, height)= (" << img->width << ", " << img->height << ")\n";
 	PRINT_SUCCESS;
 	return true;
 }
@@ -59,30 +62,35 @@ bool shader_test()
 	std::cerr << __func__ << '\n';
 	//TODO: stub model against Shader
 	//TODO: implement Shader
-	try
-	{
-		//const Shader shader{ Constants::Shader::vertexPath,
-		//	Constants::Shader::fragmentPath };
-		const auto shader = ShaderFactory::make(
-			Constants::Shader::vertexPath,
-			Constants::Shader::fragmentPath
-		);
-		shader->useShaderProgram();
-		shader->setUniformValue("integer", 0);
-		shader->setUniformValue("boolean", true);
-		shader->setUniformValue("float", 3.14f);
-		shader->setUniformValue("vec3", glm::vec3{ 0.f, 1.f, .5f });
-		shader->setUniformValue("mat4", glm::mat4{ 1.f, 1.f, 1.f, 1.f,
-		1.f, 1.f, 1.f, 1.f,
-		1.f, 1.f, 1.f, 1.f,
-		1.f, 1.f, 1.f, 1.f,
-			});
-	}
-	catch (const Shader::err_log& e)
-	{
-		std::cout << e.what() << '\n';
-		return false;
-	}
+	const auto shader = ShaderFactory::make(
+		Stub::Shader::vertexPath,
+		Stub::Shader::fragmentPath
+	);
+	shader->useShaderProgram();
+	shader->setUniformValue("integer", 0);
+	shader->setUniformValue("boolean", true);
+	shader->setUniformValue("float", 3.14f);
+	shader->setUniformValue("vec3", glm::vec3{ 0.f, 1.f, .5f });
+	shader->setUniformValue("mat4", glm::mat4{ 1.f, 1.f, 1.f, 1.f,
+	1.f, 1.f, 1.f, 1.f,
+	1.f, 1.f, 1.f, 1.f,
+	1.f, 1.f, 1.f, 1.f,
+		});
+	PRINT_SUCCESS;
+	return true;
+}
+
+bool texture_test()
+{
+	PRINT_FUNC;
+	static auto filename1 = Stub::texture.textureFileName.c_str();
+	const auto texture1 = TextureFactory::make(filename1);
+	auto img = ImageFactory::make(filename1);
+	const auto texture2 = TextureFactory::make(std::move(img));	// 소유권이 img에서 texture2로 넘어감.
+	std::cout << "img has lost own occupant address is : " << img.get() << ". Please don't use this\n";
+
+	std::cout << texture1->getTextureImg() << '\n';
+	std::cout << texture2->getTextureImg() << '\n';
 	PRINT_SUCCESS;
 	return true;
 }
@@ -97,11 +105,11 @@ GLFWwindow* glfw_init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	// create a glfw window
-	const auto window = glfwCreateWindow(Constants::windowWidth, Constants::windowHeight, Constants::windowName.c_str(), NULL, NULL);
-	if (window == NULL) {
+	const auto window = glfwCreateWindow(Stub::windowWidth, Stub::windowHeight, Stub::windowName.c_str(), nullptr, nullptr);
+	if (window == nullptr) {
 		std::cout << "Failed to create GLFW window!\n";
 		glfwTerminate();
-		exit(EXIT_FAILURE);
+		return nullptr;
 	}
 	glfwMakeContextCurrent(window);
 	// window viewport should be adjusted when window size is changed.
@@ -118,7 +126,7 @@ GLFWwindow* glfw_init()
 	// of the rendering window (ViewPort) so OpenGL knows how we want to
 	// display the data and coords with respect to the window.
 	//glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	framebuffer_size_callback(window, Constants::windowWidth, Constants::windowHeight);
+	framebuffer_size_callback(window, Stub::windowWidth, Stub::windowHeight);
 
 	PRINT_SUCCESS;
 	return window;

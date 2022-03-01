@@ -5,14 +5,14 @@
 
 struct TextureFactory : public TextureI
 {
-	static std::unique_ptr<Texture> make(const Image& img)
+	static std::unique_ptr<Texture> make(std::unique_ptr<Image> img)
 	{
-		return std::make_unique<Texture>(img);
+		return std::make_unique<Texture>(std::move(img));
 	}
 	static std::unique_ptr<Texture> make(const char* filename)
 	{
 		return std::make_unique<Texture>(
-			*ImageFactory::make(filename)
+				ImageFactory::make(filename)
 			);
 	}
 };
