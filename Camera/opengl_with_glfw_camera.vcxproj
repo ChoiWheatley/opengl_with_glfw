@@ -45,6 +45,7 @@
     <ClCompile Include="UnitVector.cpp" />
     <ClCompile Include="use_camera_class_main.cpp" />
     <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="vertex_test.hpp" />
     <ClCompile Include="vertices.h" />
     <ClCompile Include="Projection.cpp" />
     <ClCompile Include="ViewMatrix.cpp" />
@@ -77,11 +78,14 @@
     <ClInclude Include="UnitVector.h" />
     <ClInclude Include="Projection.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="VertexAttribute_DS.h" />
+    <ClInclude Include="VertexFactory.hpp" />
     <ClInclude Include="VertexI.h" />
     <ClInclude Include="ViewMatrix.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.frag" />
+    <None Include="mock_vertex_data.h" />
     <None Include="vertex.vert" />
   </ItemGroup>
   <ItemGroup>

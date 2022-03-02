@@ -4,6 +4,7 @@
 #include "ShaderFactory.hpp"
 #include "ImageFactory.hpp"
 #include "TextureFactory.hpp"
+#include "vertex_test.hpp"
 #include "Stub.h"
 
 #define PRINT_FUNC std::cerr<<"testing..."<<__func__<<'\n'
@@ -31,6 +32,10 @@ int test_main(int argc, char ** argv)
 			return 1;
 		if (!texture_test())
 			return 1;
+		const auto v = VertexTest::testVertexInit();
+		if (v == nullptr)
+			throw std::runtime_error{"ERROR :: vertex init error!"};
+		VertexTest::testVertexBinding(v.get());
 
 		while (!glfwWindowShouldClose(window)) {}
 	}

@@ -58,6 +58,9 @@
     <ClCompile Include="PosAxisAngle.cpp">
       <Filter>entity\node\mesh_impl</Filter>
     </ClCompile>
+    <ClCompile Include="vertex_test.hpp">
+      <Filter>test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h">
@@ -141,6 +144,12 @@
     <ClInclude Include="MeshPainter.hpp">
       <Filter>user</Filter>
     </ClInclude>
+    <ClInclude Include="VertexAttribute_DS.h">
+      <Filter>entity\node\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexFactory.hpp">
+      <Filter>entity\factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.frag">
@@ -148,6 +157,9 @@
     </None>
     <None Include="vertex.vert">
       <Filter>shader</Filter>
+    </None>
+    <None Include="mock_vertex_data.h">
+      <Filter>test\stub</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
