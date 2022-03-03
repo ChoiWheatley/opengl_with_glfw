@@ -3,8 +3,14 @@
 #include <string>
 #include <glm/gtc/type_ptr.hpp>
 #include <glad/glad.h>
+#include <iostream>
+
+#define PRINT_FUNC std::cerr<<"testing..."<<__func__<<'\n'
+#define PRINT_SUCCESS std::cerr<<__func__<< " have successed!\n"
+
 namespace Stub
 {
+
 	constexpr int windowWidth = 800;
 	constexpr int windowHeight = 600;
 	namespace Camera

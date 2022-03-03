@@ -7,9 +7,6 @@
 #include "vertex_test.hpp"
 #include "Stub.h"
 
-#define PRINT_FUNC std::cerr<<"testing..."<<__func__<<'\n'
-#define PRINT_SUCCESS std::cerr<<__func__<< " have successed!\n"
-
 static bool image_test();
 static bool shader_test();
 static bool texture_test();
@@ -42,9 +39,10 @@ int test_main(int argc, char ** argv)
 	catch (const std::exception& e)
 	{
 		std::cerr << typeid(e).name() << " :: " << e.what() << '\n';
+		return EXIT_FAILURE;
 	}
 	PRINT_SUCCESS;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 bool image_test()

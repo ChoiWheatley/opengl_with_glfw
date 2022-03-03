@@ -5,14 +5,14 @@ void Vertex::bindVao()
 	glBindVertexArray(vao_);
 }
 
-Vertex::Vertex(GLsizeiptr dataSize, const void* data, std::vector<VertexAttribute_DS> vertex_attributes)
-	: vao_(gen_vao()), vbo_(gen_vbo()), dataSize_(dataSize), data_(data), vertex_attributes_(std::move(vertex_attributes))
+Vertex::Vertex(const void* data, std::vector<VertexAttribute_DS> vertex_attributes)
+	: vao_(gen_vao()), vbo_(gen_vbo()), data_(data), vertex_attributes_(std::move(vertex_attributes))
 {
 	glBindVertexArray(vao_);
 	glBindBuffer(buffer_target, vbo_);
 
-	assign_buffer_data(buffer_target, dataSize_, data, buffer_usage);
-	for(auto v : vertex_attributes_)
+	assign_buffer_data(buffer_target, sizeof(data_), data_, buffer_usage);
+	for(const auto v : vertex_attributes_)
 	{
 		vertexAttribPointer(v);
 		glEnableVertexAttribArray(v.index);

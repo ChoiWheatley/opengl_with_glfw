@@ -12,7 +12,7 @@ class Vertex final
 public: // interface
 	void bindVao() override;
 public: // constructor and destructor
-	Vertex(GLsizeiptr dataSize, const void * data, std::vector<VertexAttribute_DS> vertex_attributes);
+	Vertex(const void * data, std::vector<VertexAttribute_DS> vertex_attributes);
 	Vertex() = delete;
 	~Vertex();
 
@@ -24,7 +24,6 @@ private: // method
 private: // member
 	const unsigned int vao_;
 	const unsigned int vbo_;
-	const GLsizeiptr dataSize_;
 	const void * data_ = nullptr;
 	const std::vector<VertexAttribute_DS> vertex_attributes_;
 public: // public member
